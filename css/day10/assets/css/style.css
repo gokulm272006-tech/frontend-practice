@@ -1,0 +1,110 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+    
+   
+}
+   
+
+.top-header{
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: #f5f1f1;
+}
+
+.top-header > nav{
+    display: flex;
+    gap: 1rem;
+   position: relative;
+   left: 1050px;
+}
+.nav {
+    display: flex;
+    justify-content: space-between;
+    gap: 50px;
+    font-weight:bold;
+}
+
+
+.header{
+    position: sticky;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #fff;
+    
+}
+
+.offer{
+    background-color: #f5f1f1;
+    padding: 0.5rem 2rem;
+    text-align: center;
+    font-size: 14px;
+}
+
+.banner > img{
+    width: 100%;
+    
+    
+}
+
+.content{
+    display: flex;
+    justify-content: space-between;
+    padding: 2rem;
+    font-size: larger;
+    margin-top: 3rem;
+}
+
+
+
+.card > a > img{
+    grid-template-columns: repeat(3, 1fr);
+       
+    width: 650px;
+    
+   
+}
+.card2> a > img{
+    
+   grid-template-columns: repeat(3, 1fr);
+       
+    width: 400px;
+    padding: 1rem;
+   
+   
+}
+.img>img{
+    width: 100%;
+    margin-top: 80px;
+    object-fit: cover;
+}
+
+.img2>img{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 80px;
+}
+ 
+footer{
+    margin: 50px;
+    text-align: center;
+}

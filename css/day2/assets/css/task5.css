@@ -1,0 +1,25 @@
+
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background-color: #141313;
+}
+
+h1 {
+    color: rgb(16, 209, 32);
+}
+
+.hospital-info {
+    background-color: white;
+    width: 400px;
+    margin: 20px auto;
+    padding: 20px;
+}
+
+#emergency {
+    background-color: red;
+    color: white;
+    width: 400px;
+    margin:  auto;
+    padding: 20px;
+}

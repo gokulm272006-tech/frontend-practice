@@ -1,0 +1,26 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+ul{
+    list-style: none;
+    text-align: center;
+    
+    margin-top: 50px;
+}
+li{
+    padding: 10px;
+}
+
+li:first-child{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #7c2ac9;
+}
+li:last-child{
+    font-size: 20px;
+    font-weight: bold;
+    background-color: #c92ac1;
+}

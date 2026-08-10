@@ -1,0 +1,67 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+.card {
+    width: 300px;
+    height: 220px;
+    padding: 20px;
+    padding-top: 25px;
+    padding-right: 25px;
+    padding-bottom: 25px;
+    padding-left: 25px;
+    border: 5px solid black;
+    border-width: 5px;
+    border-style: solid;
+    border-color: black;
+    border-radius: 15px;
+    margin: 30px;
+    margin-top: 30px;
+    margin-right: auto;
+    margin-bottom: 30px;
+    margin-left: auto;
+    background-color: white;
+    text-align: center;
+}
+
+
+.student-card {
+    border-color: blue;
+    background-color: lightblue;
+}
+
+
+.employee-card {
+    border-color: green;
+    background-color: lightgreen;
+}
+
+
+.product-card {
+    border-color: orange;
+    background-color: lightyellow;
+}
+
+
+.movie-card {
+    border-color: purple;
+    background-color: lavender;
+}
+
+
+.company-card {
+    border-color: red;
+    background-color: lightpink;
+}
+
+
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin: 30px;
+}

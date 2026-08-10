@@ -1,0 +1,38 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+form {
+    width: 350px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+}
+
+table {
+    width: 100%;
+}
+
+td {
+    padding: 10px;
+}
+
+
+input {
+    width: 100%;
+    padding: 8px;
+    border: 2px solid gray;
+    border-radius: 5px;
+    outline: none;
+    box-sizing: border-box;
+}
+
+
+input:focus {
+    border-color: blue;        
+    background-color: #e6f7ff;   
+}

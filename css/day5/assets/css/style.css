@@ -1,0 +1,103 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600;700;900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+}
+body{
+    background-color: #000000;
+    line-height: 1.6;
+}
+
+a{
+    text-decoration: none;
+    color: inherit;
+}
+
+.logo{
+    background-color:tomato;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+.navigation{
+    background-color: #333;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.navigation a:hover{
+    color: #555;
+}
+.navigation a{
+    color: #fff;
+    margin: 0 10px;
+    font-size: 18px;
+}
+
+.main-content{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    margin-top: 80px;
+  
+}
+
+.text-content{
+    font-size: 35px;
+    color:tomato;
+}
+
+.image-content>img  {
+    
+    width: 200px;
+    height: 200px;
+}
+.image-content>input{
+    padding: 10px;
+   
+    margin-left: 40px;
+    border-radius: 5px;
+    border: none;
+    outline: none;
+    background-color:tomato;
+    color: #fff;
+}
+
+.image-content>input:hover{
+    background-color: #555;
+    cursor: pointer;
+}
+
+.cards{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+    margin-top: 80px;
+}
+
+.card{
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    width: 200px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card i{
+    font-size: 40px;
+    color:tomato;
+}

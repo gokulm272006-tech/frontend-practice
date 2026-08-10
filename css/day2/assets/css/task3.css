@@ -1,0 +1,20 @@
+
+.department {
+    background-color: lightblue;
+    color: black;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    margin: 10px;
+    padding: 15px;
+}
+
+#mechanical {
+    background-color: lightgreen;
+    color: black;
+    width: 300px;
+    height: 50px;
+    text-align: center;
+    margin: 10px;
+    padding: 15px;
+}

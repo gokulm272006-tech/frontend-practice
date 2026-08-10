@@ -1,0 +1,39 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body {
+    background-color: #f2f2f2;
+    font-family: Arial, sans-serif;
+}
+
+
+.id-card {
+    width: 350px;
+    height: 400px;
+    padding: 20px;
+    margin: 100px auto;
+    border: 3px solid blue;
+    border-radius: 20px;
+    text-align: center;
+    background-color: rgb(235, 236, 235);
+}
+
+.id-card img {
+    width: 200px;
+    height: 200px;
+
+}
+
+.id-card h2 {
+    color: darkblue;
+}
+
+.id-card h3 {
+    color: green;
+}
+
+.id-card p {
+    color: #333333;
+}

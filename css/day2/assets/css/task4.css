@@ -1,0 +1,18 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.movie-card {
+    background-color: rgb(230, 173, 216);
+    width: 300px;
+    height: 100px;
+    margin: 15px;
+    padding: 20px;
+    border-radius: 5px;
+}
+h2, p {
+    color: black;
+    text-align: center;
+}

@@ -1,0 +1,32 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: #f0f8ff;
+    color: #333;
+    margin-top: 80px;
+    height: 100vh;
+    font-family: Arial, sans-serif;
+}
+
+.card {
+    background-color: #4CAF50;
+    color: white;
+    width: 350px;
+    height: 180px;
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+h2 {
+    margin-bottom: 15px;
+}
+
+p {
+    margin: 10px 0;
+}

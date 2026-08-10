@@ -1,0 +1,29 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.row {
+    width: 400px;
+    margin: 30px auto;
+}
+
+.col-12 {
+    padding: 10px;
+}
+
+
+
+h2::before {
+    content: "★ ";
+    color: gold;
+    font-size: 20px;
+}
+
+h2::after {
+    content: " ✔";
+    color: green;
+    font-size: 18px;
+}
