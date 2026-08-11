@@ -107,3 +107,189 @@ footer{
     margin: 50px;
     text-align: center;
 }
+@media screen and (max-width: 991px) {
+
+    header > div:first-child {
+        padding: 0 25px;
+    }
+
+    .nav {
+        gap: 15px;
+    }
+
+    .nav a {
+        font-size: 14px;
+    }
+
+    section {
+        padding: 30px 25px;
+    }
+
+    .content h2 {
+        font-size: 24px;
+    }
+
+    .card,
+    .card2 {
+        gap: 15px;
+    }
+}
+
+
+
+
+@media screen and (max-width: 767px) {
+
+    /* Header */
+
+    header > div:first-child {
+        height: auto;
+        min-height: 70px;
+        padding: 10px 15px;
+    }
+
+
+
+    .nav {
+        display: none;
+    }
+
+
+
+    header > div:first-child > div:first-child img {
+        width: 45px;
+        height: 45px;
+    }
+
+   
+
+    header > div:last-child nav {
+        gap: 10px;
+    }
+
+    header > div:last-child svg {
+        width: 22px;
+        height: 22px;
+    }
+
+  
+
+    .offer {
+        padding: 12px 10px;
+    }
+
+    .offer p {
+        font-size: 12px;
+    }
+
+   
+
+    .banner {
+        margin-top: 0;
+    }
+
+    .banner img {
+        width: 100%;
+        height: auto;
+    }
+
+ 
+
+    section {
+        padding: 25px 15px;
+    }
+
+    .content {
+        margin-bottom: 15px;
+    }
+
+    .content h2 {
+        font-size: 22px;
+    }
+
+  
+
+    .card {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .card a {
+        width: 100%;
+    }
+
+   
+
+    .card2 {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+
+    .card2 a {
+        width: 100%;
+    }
+
+    .card2 a:last-child {
+        grid-column: 1 / 3;
+    }
+
+  
+
+    .img,
+    .img2 {
+        margin-bottom: 15px;
+    }
+
+   
+
+    footer {
+        padding: 25px 15px;
+    }
+
+    footer span {
+        font-size: 12px;
+    }
+}
+
+
+
+@media screen and (max-width: 480px) {
+
+    header > div:first-child {
+        padding: 8px 12px;
+    }
+
+    header > div:last-child nav {
+        gap: 7px;
+    }
+
+    header > div:last-child svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    .offer p {
+        font-size: 11px;
+    }
+
+    section {
+        padding: 20px 12px;
+    }
+
+    .content h2 {
+        font-size: 20px;
+    }
+
+    .card2 {
+        grid-template-columns: 1fr;
+    }
+
+    .card2 a:last-child {
+        grid-column: auto;
+    }
+
+    footer span {
+        font-size: 11px;
+    }
+}
