@@ -1,0 +1,2661 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive technical article on Rust Programming Language: Fast, Safe, and Reliable Systems Software Development.">
+    <meta name="keywords" content="Rust, Programming Language, Systems Programming, Memory Safety, Concurrency, WebAssembly, Backend Development">
+    <meta name="author" content="Tech Research & Developer Engineering">
+    <title>Rust Programming Language: Fast, Safe, and Reliable Software Development</title>
+
+    <!-- Google Fonts: Inter and JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome Icons (v6.5.1) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        rust: {
+                            50: '#fff7ed',
+                            100: '#ffedd5',
+                            200: '#fed7aa',
+                            300: '#fdba74',
+                            400: '#fb923c',
+                            500: '#f97316',
+                            600: '#ea580c',
+                            700: '#c2410c',
+                            800: '#9a3412',
+                            900: '#7c2d12',
+                            dark: '#c43d00',
+                            accent: '#de411b',
+                            glow: '#f74c00',
+                        },
+                        tech: {
+                            bg: '#090d16',
+                            card: '#0f172a',
+                            cardAlt: '#131c31',
+                            cardHover: '#18233c',
+                            border: '#1e293b',
+                            borderHover: '#334155',
+                            muted: '#94a3b8',
+                            subtle: '#64748b'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+                        mono: ['"JetBrains Mono"', 'monospace'],
+                    },
+                    boxShadow: {
+                        'glow-orange': '0 0 25px -5px rgba(234, 88, 12, 0.25)',
+                        'glow-orange-lg': '0 0 45px -10px rgba(234, 88, 12, 0.35)',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #090d16;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #ea580c;
+        }
+
+        /* Reading progress bar */
+        #reading-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #ea580c, #f97316, #fb923c);
+            z-index: 100;
+            width: 0%;
+            transition: width 0.1s ease-out;
+        }
+
+        /* Subtle code token highlighting */
+        .token-keyword { color: #f97316; font-weight: 600; }
+        .token-function { color: #38bdf8; font-weight: 500; }
+        .token-string { color: #4ade80; }
+        .token-type { color: #facc15; }
+        .token-macro { color: #c084fc; font-weight: 600; }
+        .token-comment { color: #64748b; font-style: italic; }
+        .token-symbol { color: #e2e8f0; }
+    </style>
+</head>
+
+<body class="bg-tech-bg text-slate-100 font-sans antialiased selection:bg-rust-600 selection:text-white min-h-screen flex flex-col">
+
+    <!-- Reading Progress Bar -->
+    <div id="reading-progress"></div>
+
+    <!-- ==========================================
+         1. NAVIGATION BAR (Sticky & Responsive)
+         ========================================== -->
+    <header class="sticky top-0 z-50 bg-tech-bg/90 backdrop-blur-md border-b border-tech-border transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16 sm:h-20">
+                
+                <!-- Logo -->
+                <a href="#hero" class="flex items-center gap-3 group focus:outline-none focus:ring-2 focus:ring-rust-500 rounded-lg p-1" aria-label="Rust Article Home">
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-rust-500 to-rust-700 flex items-center justify-center shadow-lg shadow-rust-600/20 group-hover:scale-105 transition-transform duration-200">
+                        <i class="fa-brands fa-rust text-2xl text-white"></i>
+                    </div>
+                    <div>
+                        <span class="text-lg sm:text-xl font-bold tracking-tight text-white block group-hover:text-rust-400 transition-colors">RustTech</span>
+                        <span class="text-[10px] tracking-wider uppercase text-tech-muted font-mono block -mt-1">Systems Engineering</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Navigation Links -->
+                <nav class="hidden lg:flex items-center gap-1 xl:gap-2 text-sm font-medium text-slate-300" aria-label="Main Navigation">
+                    <a href="#hero" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Home</a>
+                    <a href="#about" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">About</a>
+                    <a href="#features" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Features</a>
+                    <a href="#applications" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Applications</a>
+                    <a href="#comparisons" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Comparisons</a>
+                    <a href="#career" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Career</a>
+                    <a href="#roadmap" class="px-3 py-2 rounded-md hover:text-rust-400 hover:bg-tech-card transition-all">Roadmap</a>
+                </nav>
+
+                <!-- Action Controls: Search Modal Trigger, GitHub, Mobile Toggle -->
+                <div class="flex items-center gap-2 sm:gap-3">
+                    <!-- Search Trigger Button -->
+                    <button id="search-open-btn" class="p-2.5 rounded-lg text-slate-400 hover:text-white bg-tech-card hover:bg-tech-cardHover border border-tech-border transition-colors focus:outline-none focus:ring-2 focus:ring-rust-500" title="Search Article" aria-label="Open Search">
+                        <i class="fa-solid fa-magnifying-glass text-sm"></i>
+                    </button>
+
+                    <!-- GitHub Repository Link -->
+                    <a href="https://github.com/rust-lang/rust" target="_blank" rel="noopener noreferrer" class="p-2.5 rounded-lg text-slate-400 hover:text-white bg-tech-card hover:bg-tech-cardHover border border-tech-border transition-colors focus:outline-none focus:ring-2 focus:ring-rust-500" title="Rust GitHub Repository" aria-label="Rust GitHub">
+                        <i class="fa-brands fa-github text-sm"></i>
+                    </a>
+
+                    <!-- CTA Mini Button (Desktop) -->
+                    <a href="#roadmap" class="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-rust-600 hover:bg-rust-500 text-white text-xs font-semibold uppercase tracking-wider transition-all duration-200 shadow-md hover:shadow-rust-600/25">
+                        <span>Get Started</span>
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+                    </a>
+
+                    <!-- Mobile Menu Hamburger Button -->
+                    <button id="mobile-menu-btn" class="lg:hidden p-2.5 rounded-lg text-slate-300 hover:text-white bg-tech-card border border-tech-border focus:outline-none focus:ring-2 focus:ring-rust-500" aria-label="Toggle Navigation Menu">
+                        <i id="hamburger-icon" class="fa-solid fa-bars text-lg"></i>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Mobile Navigation Dropdown -->
+        <div id="mobile-menu" class="hidden lg:hidden border-b border-tech-border bg-tech-card/95 backdrop-blur-xl px-4 pt-2 pb-6 space-y-1">
+            <a href="#hero" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-house w-6 text-rust-500 mr-2"></i> Home
+            </a>
+            <a href="#about" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-circle-info w-6 text-rust-500 mr-2"></i> About
+            </a>
+            <a href="#features" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-microchip w-6 text-rust-500 mr-2"></i> Features
+            </a>
+            <a href="#applications" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-cubes w-6 text-rust-500 mr-2"></i> Applications
+            </a>
+            <a href="#comparisons" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-scale-balanced w-6 text-rust-500 mr-2"></i> Comparisons
+            </a>
+            <a href="#career" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-briefcase w-6 text-rust-500 mr-2"></i> Career
+            </a>
+            <a href="#roadmap" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-route w-6 text-rust-500 mr-2"></i> Roadmap
+            </a>
+            <a href="#faq" class="mobile-nav-link block px-3 py-2.5 rounded-lg text-base font-medium text-slate-200 hover:text-rust-400 hover:bg-tech-bg transition-colors">
+                <i class="fa-solid fa-circle-question w-6 text-rust-500 mr-2"></i> FAQ
+            </a>
+        </div>
+    </header>
+
+
+    <!-- ==========================================
+         SEARCH MODAL (Interactive Section Search)
+         ========================================== -->
+    <div id="search-modal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-start justify-center pt-20 px-4">
+        <div class="bg-tech-card border border-tech-border w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden animate-in fade-in zoom-in-95 duration-200">
+            <div class="p-4 border-b border-tech-border flex items-center gap-3">
+                <i class="fa-solid fa-magnifying-glass text-rust-500"></i>
+                <input id="search-input" type="text" placeholder="Search topics, syntax, features, comparisons..." class="w-full bg-transparent text-white placeholder-slate-500 focus:outline-none text-sm sm:text-base">
+                <button id="search-close-btn" class="p-1 text-slate-400 hover:text-white rounded">
+                    <i class="fa-solid fa-xmark text-lg"></i>
+                </button>
+            </div>
+            <div id="search-results" class="max-h-80 overflow-y-auto p-3 space-y-1 text-sm">
+                <!-- Search items populated via JavaScript -->
+            </div>
+            <div class="p-3 bg-tech-cardAlt border-t border-tech-border text-xs text-tech-muted flex items-center justify-between">
+                <span>Navigate through quick search links</span>
+                <span class="font-mono">ESC to close</span>
+            </div>
+        </div>
+    </div>
+
+
+    <main class="flex-grow">
+
+        <!-- ==========================================
+             2. HERO SECTION
+             ========================================== -->
+        <section id="hero" class="relative overflow-hidden py-16 sm:py-24 lg:py-32 border-b border-tech-border">
+            <!-- Ambient Background Glows -->
+            <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-96 sm:w-[600px] h-96 sm:h-[600px] bg-rust-600/10 blur-[130px] rounded-full pointer-events-none"></div>
+            <div class="absolute -top-10 -right-10 w-72 h-72 bg-rust-500/10 blur-[90px] rounded-full pointer-events-none"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+                    
+                    <!-- Hero Content Left (7 cols) -->
+                    <div class="lg:col-span-7 space-y-6 text-center lg:text-left">
+                        
+                        <!-- Badge -->
+                        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-tech-card border border-tech-border text-xs font-semibold text-rust-400 uppercase tracking-widest shadow-inner">
+                            <i class="fa-solid fa-shield-halved text-rust-500"></i>
+                            <span>Memory-Safe Systems Programming</span>
+                        </div>
+
+                        <!-- Main Heading -->
+                        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight">
+                            Rust Programming Language
+                        </h1>
+
+                        <!-- Subtitle -->
+                        <p class="text-xl sm:text-2xl font-semibold text-rust-500 tracking-wide font-mono">
+                            Fast. Safe. Reliable.
+                        </p>
+
+                        <!-- Description -->
+                        <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
+                            Rust is a modern systems programming language focused on performance, memory safety, and reliable software development. Engineered to empower developers to write robust infrastructure without runtime garbage collection overhead.
+                        </p>
+
+                        <!-- Call to Action Buttons -->
+                        <div class="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 pt-2">
+                            <a href="#roadmap" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-rust-600 hover:bg-rust-500 text-white font-semibold text-base transition-all duration-200 shadow-lg shadow-rust-600/30 hover:shadow-rust-600/50 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                                <span>Start Learning Rust</span>
+                                <i class="fa-solid fa-arrow-right text-sm"></i>
+                            </a>
+                            <a href="#features" class="w-full sm:w-auto inline-flex items-center justify-center gap-3 px-8 py-4 rounded-xl bg-tech-card hover:bg-tech-cardHover text-slate-200 border border-tech-border hover:border-rust-500/50 font-semibold text-base transition-all duration-200 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                                <span>Explore Features</span>
+                                <i class="fa-solid fa-arrow-down text-sm"></i>
+                            </a>
+                        </div>
+
+                        <!-- Trust / Benchmark Strip -->
+                        <div class="pt-6 border-t border-tech-border/80 grid grid-cols-3 gap-4 max-w-xl mx-auto lg:mx-0 text-center">
+                            <div class="p-2">
+                                <div class="text-xl sm:text-2xl font-bold text-white font-mono">8+ Yrs</div>
+                                <div class="text-xs text-tech-muted uppercase mt-0.5">Most Loved Tech</div>
+                            </div>
+                            <div class="p-2 border-x border-tech-border/80">
+                                <div class="text-xl sm:text-2xl font-bold text-rust-400 font-mono">0 GC</div>
+                                <div class="text-xs text-tech-muted uppercase mt-0.5">Zero Pause Times</div>
+                            </div>
+                            <div class="p-2">
+                                <div class="text-xl sm:text-2xl font-bold text-white font-mono">100%</div>
+                                <div class="text-xs text-tech-muted uppercase mt-0.5">Compile Safety</div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- Hero Tech Graphic / Illustration (5 cols) -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-md">
+                            <!-- Card Frame -->
+                            <div class="relative bg-tech-card border border-tech-border rounded-2xl p-6 shadow-2xl shadow-black/60 overflow-hidden">
+                                
+                                <!-- Header bar of the tech frame -->
+                                <div class="flex items-center justify-between pb-4 border-b border-tech-border mb-6">
+                                    <div class="flex items-center gap-2">
+                                        <span class="w-3 h-3 rounded-full bg-red-500/80 inline-block"></span>
+                                        <span class="w-3 h-3 rounded-full bg-yellow-500/80 inline-block"></span>
+                                        <span class="w-3 h-3 rounded-full bg-green-500/80 inline-block"></span>
+                                        <span class="text-xs font-mono text-slate-400 ml-2">rustc --version 1.80.0</span>
+                                    </div>
+                                    <span class="text-xs font-mono text-rust-400 px-2 py-0.5 rounded bg-rust-500/10 border border-rust-500/20">Release</span>
+                                </div>
+
+                                <!-- Central Interactive Tech Schematic SVG -->
+                                <div class="py-4 flex flex-col items-center justify-center">
+                                    <div class="relative w-40 h-40 flex items-center justify-center">
+                                        <!-- Outer rotating gear simulation -->
+                                        <div class="absolute inset-0 rounded-full border-2 border-dashed border-rust-500/30 animate-spin" style="animation-duration: 25s;"></div>
+                                        <!-- Middle Ring -->
+                                        <div class="w-32 h-32 rounded-full bg-tech-cardAlt border border-tech-border flex items-center justify-center shadow-inner">
+                                            <!-- Center Core with Rust Logo -->
+                                            <div class="w-20 h-20 rounded-2xl bg-gradient-to-tr from-rust-600 to-rust-500 flex items-center justify-center shadow-lg shadow-rust-600/40">
+                                                <i class="fa-brands fa-rust text-4xl text-white"></i>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Architectural Tech Pillars -->
+                                    <div class="grid grid-cols-2 gap-3 w-full mt-6 text-left">
+                                        <div class="bg-tech-bg/90 border border-tech-border rounded-xl p-3 flex items-start gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-rust-500/10 flex items-center justify-center text-rust-400 shrink-0 mt-0.5">
+                                                <i class="fa-solid fa-shield-halved text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-white">Borrow Checker</div>
+                                                <div class="text-[11px] text-tech-muted">No Null/Dangling Pointers</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-tech-bg/90 border border-tech-border rounded-xl p-3 flex items-start gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-emerald-500/10 flex items-center justify-center text-emerald-400 shrink-0 mt-0.5">
+                                                <i class="fa-solid fa-gauge-high text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-white">Zero-Cost</div>
+                                                <div class="text-[11px] text-tech-muted">C/C++ Speed Equivalent</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-tech-bg/90 border border-tech-border rounded-xl p-3 flex items-start gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-sky-500/10 flex items-center justify-center text-sky-400 shrink-0 mt-0.5">
+                                                <i class="fa-solid fa-code-branch text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-white">Fearless Threads</div>
+                                                <div class="text-[11px] text-tech-muted">Data Race Prevention</div>
+                                            </div>
+                                        </div>
+
+                                        <div class="bg-tech-bg/90 border border-tech-border rounded-xl p-3 flex items-start gap-3">
+                                            <div class="w-8 h-8 rounded-lg bg-purple-500/10 flex items-center justify-center text-purple-400 shrink-0 mt-0.5">
+                                                <i class="fa-solid fa-boxes-packing text-sm"></i>
+                                            </div>
+                                            <div>
+                                                <div class="text-xs font-bold text-white">Cargo Toolchain</div>
+                                                <div class="text-[11px] text-tech-muted">Build, Test, Publish</div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                                <!-- Footer Status Pill -->
+                                <div class="mt-4 pt-3 border-t border-tech-border flex items-center justify-between text-xs font-mono text-tech-muted">
+                                    <span class="flex items-center gap-2">
+                                        <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+                                        LLVM Optimized Backend
+                                    </span>
+                                    <span class="text-slate-400">crates.io Ecosystem</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             3. INTRODUCTION & ARTICLE LAYOUT (Main + Sidebar)
+             ========================================== -->
+        <section id="about" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Title Header -->
+            <div class="text-center max-w-3xl mx-auto mb-12">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-book-open text-xs"></i>
+                    <span>Article Introduction</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    The Modern Standard for Systems Programming
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    An in-depth engineering exploration of how Rust fundamentally solved software engineering's fifty-year memory safety crisis.
+                </p>
+            </div>
+
+            <!-- Two Column Layout: Main Content (8 cols) + Sidebar (4 cols) -->
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                
+                <!-- Main Content Area (8 Cols) -->
+                <article class="lg:col-span-8 space-y-8 text-slate-300 leading-relaxed text-base">
+                    
+                    <!-- Subsection: What Rust Is -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400">
+                                <i class="fa-solid fa-circle-nodes text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white tracking-tight">What is Rust?</h3>
+                        </div>
+                        <p>
+                            Rust is an open-source, statically-typed, compiled programming language engineered specifically for systems architecture, systems performance, and absolute memory safety. Unlike conventional systems languages such as C and C++, Rust enforces memory management guarantees through a deterministic compile-time model known as the <strong class="text-white font-semibold">Ownership and Borrowing system</strong>.
+                        </p>
+                        <p>
+                            This breakthrough architectural paradigm eliminates entire categories of critical security vulnerabilities—such as segmentation faults, buffer overflows, use-after-free anomalies, and double frees—all without relying on a garbage collector (GC) that would otherwise induce unpredictable runtime latency pauses.
+                        </p>
+                    </div>
+
+                    <!-- Subsection: Who Created Rust & History -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400">
+                                <i class="fa-solid fa-user-gear text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white tracking-tight">Who Created Rust and Its Origins</h3>
+                        </div>
+                        <p>
+                            Rust originated in 2006 as a personal project initiated by <strong class="text-white font-semibold">Graydon Hoare</strong>, an engineer at Mozilla Research. Recognising the language's enormous potential for constructing ultra-fast, crash-resilient browser engines, Mozilla officially sponsored the development of Rust in 2009.
+                        </p>
+                        <p>
+                            The language was battle-tested through the creation of <strong class="text-white font-semibold">Servo</strong>, an experimental parallel browser layout engine. In May 2015, Rust officially released its historic 1.0 stable version. Today, the language is independently stewarded by the non-profit <strong class="text-white font-semibold">Rust Foundation</strong>, supported by industry titans including Google, Microsoft, AWS, Meta, and Huawei.
+                        </p>
+                    </div>
+
+                    <!-- Subsection: Why Rust Was Created -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400">
+                                <i class="fa-solid fa-lightbulb text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white tracking-tight">Why Rust Was Created</h3>
+                        </div>
+                        <p>
+                            For decades, computer science operated under a frustrating engineering compromise:
+                        </p>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 my-2">
+                            <div class="p-4 rounded-xl bg-tech-bg border border-tech-border">
+                                <div class="text-sm font-bold text-amber-400 mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-bolt text-xs"></i> Traditional Low-Level (C/C++)
+                                </div>
+                                <p class="text-xs text-tech-muted">Maximum hardware speed and direct memory access, but burdened with severe risks of crashes and security exploits.</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-tech-bg border border-tech-border">
+                                <div class="text-sm font-bold text-sky-400 mb-1 flex items-center gap-2">
+                                    <i class="fa-solid fa-recycle text-xs"></i> High-Level Languages (Java/Go)
+                                </div>
+                                <p class="text-xs text-tech-muted">Safer memory via garbage collection, but burdened by CPU overhead, memory consumption, and stop-the-world latency spikes.</p>
+                            </div>
+                        </div>
+                        <p>
+                            Rust was deliberately created to dissolve this compromise, providing <strong class="text-white font-semibold">bare-metal raw speed</strong> and <strong class="text-white font-semibold">ironclad memory safety</strong> simultaneously.
+                        </p>
+                    </div>
+
+                    <!-- Subsection: Why It Is Becoming Popular & Where Used -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 space-y-4">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400">
+                                <i class="fa-solid fa-chart-line text-lg"></i>
+                            </div>
+                            <h3 class="text-2xl font-bold text-white tracking-tight">Why Rust is Surging in Industry Adoption</h3>
+                        </div>
+                        <p>
+                            Security audits from Microsoft and Google consistently reveal that over <strong class="text-white font-semibold">70% of all critical software vulnerabilities</strong> in C/C++ codebases stem from memory safety bugs. Rust completely prevents these vulnerabilities at compile-time.
+                        </p>
+                        <p>
+                            Consequently, major industry adopters include:
+                        </p>
+                        <ul class="space-y-2 text-sm">
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rust-500 mt-1"></i>
+                                <span><strong class="text-white">Linux Kernel:</strong> Rust was accepted as the second official language for kernel development alongside C.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rust-500 mt-1"></i>
+                                <span><strong class="text-white">Microsoft Windows & Azure:</strong> Rewriting critical Windows OS components and cloud hypervisors in Rust.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rust-500 mt-1"></i>
+                                <span><strong class="text-white">Amazon Web Services (AWS):</strong> Powering AWS Lambda and AWS Fargate via the Firecracker microVM built in Rust.</span>
+                            </li>
+                            <li class="flex items-start gap-2.5">
+                                <i class="fa-solid fa-check text-rust-500 mt-1"></i>
+                                <span><strong class="text-white">Android Open Source Project (AOSP):</strong> Integrating Rust for lower-level native components, reducing memory bugs to near zero.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                </article>
+
+
+                <!-- Sidebar Area (4 Cols) -->
+                <aside class="lg:col-span-4 space-y-6 lg:sticky lg:top-24">
+                    
+                    <!-- Quick Facts Card -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center gap-2 text-rust-400 font-bold text-base mb-4 pb-3 border-b border-tech-border">
+                            <i class="fa-solid fa-circle-info"></i>
+                            <span>Quick Language Facts</span>
+                        </div>
+                        <dl class="space-y-3 text-sm">
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Original Designer</dt>
+                                <dd class="text-white font-medium">Graydon Hoare</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Initial Release</dt>
+                                <dd class="text-white font-medium">2010 (1.0 in May 2015)</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Type System</dt>
+                                <dd class="text-white font-medium">Static, Strong, Inferred</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Memory Model</dt>
+                                <dd class="text-white font-medium">Ownership (No GC)</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Package Manager</dt>
+                                <dd class="text-rust-400 font-mono font-medium">Cargo (crates.io)</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1 border-b border-tech-border/50">
+                                <dt class="text-tech-muted">Compiler Target</dt>
+                                <dd class="text-white font-mono">LLVM Backend</dd>
+                            </div>
+                            <div class="flex justify-between items-center py-1">
+                                <dt class="text-tech-muted">Governing Body</dt>
+                                <dd class="text-white font-medium">Rust Foundation</dd>
+                            </div>
+                        </dl>
+                    </div>
+
+                    <!-- Article Table of Contents Navigation -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 shadow-lg">
+                        <div class="flex items-center gap-2 text-white font-bold text-base mb-4 pb-3 border-b border-tech-border">
+                            <i class="fa-solid fa-list-ul text-rust-500"></i>
+                            <span>Article Contents</span>
+                        </div>
+                        <nav class="space-y-2 text-sm">
+                            <a href="#what-is-rust" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>1. What is Rust?</span>
+                            </a>
+                            <a href="#why-popular" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>2. Why is Rust Popular?</span>
+                            </a>
+                            <a href="#code-example" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>3. Interactive Code Example</span>
+                            </a>
+                            <a href="#ownership-borrowing" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>4. Ownership & Borrowing</span>
+                            </a>
+                            <a href="#features" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>5. Key Features Grid</span>
+                            </a>
+                            <a href="#advantages-disadvantages" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>6. Advantages vs Disadvantages</span>
+                            </a>
+                            <a href="#applications" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>7. Industry Applications</span>
+                            </a>
+                            <a href="#comparisons" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>8. Rust vs C++ & Python</span>
+                            </a>
+                            <a href="#career" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>9. Career Opportunities</span>
+                            </a>
+                            <a href="#roadmap" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>10. 10-Step Learning Roadmap</span>
+                            </a>
+                            <a href="#faq" class="flex items-center gap-2 text-slate-300 hover:text-rust-400 py-1 transition-colors">
+                                <i class="fa-solid fa-chevron-right text-xs text-rust-500"></i>
+                                <span>11. Frequently Asked Questions</span>
+                            </a>
+                        </nav>
+                    </div>
+
+                    <!-- Key Takeaways Highlight Box -->
+                    <div class="bg-gradient-to-br from-rust-900/40 via-tech-card to-tech-card border border-rust-500/30 rounded-2xl p-6">
+                        <div class="flex items-center gap-2 text-rust-400 font-bold text-sm mb-2 uppercase tracking-wide">
+                            <i class="fa-solid fa-star text-xs"></i>
+                            <span>Key Takeaway</span>
+                        </div>
+                        <p class="text-xs text-slate-300 leading-relaxed">
+                            Rust achieves safety through compile-time static analysis. If code compiles without warnings, it is mathematically verified against data races, null dereferencing, and buffer overflows.
+                        </p>
+                    </div>
+
+                </aside>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             4. WHAT IS RUST? (Beginner Friendly Breakdown)
+             ========================================== -->
+        <section id="what-is-rust" class="py-16 bg-tech-cardAlt/50 border-y border-tech-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="max-w-3xl mx-auto text-center mb-12">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-graduation-cap text-xs"></i>
+                        <span>Core Understanding</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        What is Rust? (Beginner-Friendly)
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        Breaking down the fundamental pillars of Rust into clear, intuitive concepts.
+                    </p>
+                </div>
+
+                <!-- Modern Information Card with Code Icon Header -->
+                <div class="bg-tech-card border border-tech-border rounded-3xl p-6 sm:p-10 shadow-xl mb-12">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4 pb-6 border-b border-tech-border">
+                        <div class="w-14 h-14 rounded-2xl bg-rust-600/20 border border-rust-500/30 flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-code text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-xl sm:text-2xl font-bold text-white">The Five Core Pillars of Rust Architecture</h3>
+                            <p class="text-sm text-tech-muted">Every aspect of Rust is designed to balance developer control with absolute safety guarantees.</p>
+                        </div>
+                    </div>
+
+                    <!-- 5 Core Pillars Grid -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 pt-8">
+                        
+                        <!-- Pillar 1: Systems Programming -->
+                        <div class="bg-tech-bg/70 border border-tech-border hover:border-rust-500/40 rounded-2xl p-6 transition-all duration-200">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 flex items-center justify-center text-rust-400 mb-4">
+                                <i class="fa-solid fa-server text-lg"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Systems Programming</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Gives you direct, bare-metal access to hardware, physical memory registers, and CPU instructions without forcing runtime overhead or bulky software interpreters.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 2: Performance -->
+                        <div class="bg-tech-bg/70 border border-tech-border hover:border-rust-500/40 rounded-2xl p-6 transition-all duration-200">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 flex items-center justify-center text-amber-400 mb-4">
+                                <i class="fa-solid fa-bolt text-lg"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">High Performance</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Compiles directly to optimized machine code via the LLVM compiler suite, matching or exceeding the blazing operational execution speeds of C and C++.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 3: Memory Safety -->
+                        <div class="bg-tech-bg/70 border border-tech-border hover:border-rust-500/40 rounded-2xl p-6 transition-all duration-200">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 mb-4">
+                                <i class="fa-solid fa-shield-halved text-lg"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Memory Safety</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                The compiler guarantees that variables cannot reference invalidated memory, preventing memory leaks, segment faults, and arbitrary buffer exploits.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 4: Concurrency -->
+                        <div class="bg-tech-bg/70 border border-tech-border hover:border-rust-500/40 rounded-2xl p-6 transition-all duration-200">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/10 flex items-center justify-center text-sky-400 mb-4">
+                                <i class="fa-solid fa-network-wired text-lg"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Fearless Concurrency</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                Multiple execution threads can process shared datasets safely. Rust detects and blocks data races at compile time before your code ever runs.
+                            </p>
+                        </div>
+
+                        <!-- Pillar 5: Reliability -->
+                        <div class="bg-tech-bg/70 border border-tech-border hover:border-rust-500/40 rounded-2xl p-6 transition-all duration-200 md:col-span-2 lg:col-span-2">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 flex items-center justify-center text-purple-400 mb-4">
+                                <i class="fa-solid fa-award text-lg"></i>
+                            </div>
+                            <h4 class="text-lg font-bold text-white mb-2">Production Reliability</h4>
+                            <p class="text-sm text-slate-300 leading-relaxed">
+                                By replacing unhandled null exceptions with explicit <code class="text-rust-400 font-mono text-xs bg-tech-card px-1.5 py-0.5 rounded">Option&lt;T&gt;</code> and <code class="text-rust-400 font-mono text-xs bg-tech-card px-1.5 py-0.5 rounded">Result&lt;T, E&gt;</code> types, Rust forces developers to handle every edge case, drastically reducing runtime crashes.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             5. WHY IS RUST POPULAR? (6 Feature Cards)
+             ========================================== -->
+        <section id="why-popular" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-fire text-xs"></i>
+                    <span>Industry Drivers</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Why is Rust So Popular?
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    Six fundamental architectural paradigms that have made Rust the world's most admired programming language.
+                </p>
+            </div>
+
+            <!-- 6 Feature Cards Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                
+                <!-- Card 1: Memory Safety -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">Memory Safety</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Rust prevents common memory bugs such as buffer overruns, use-after-free, and dangling pointers at compile time without relying on runtime garbage collection overhead.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Zero Segfaults Guaranteed</span>
+                    </div>
+                </div>
+
+                <!-- Card 2: High Performance -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-bolt-lightning text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">High Performance</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Provides performance on par with C and C++. Through zero-cost abstractions, your high-level code compiles into optimized assembly with no runtime speed penalty.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Direct Bare-Metal Compilation</span>
+                    </div>
+                </div>
+
+                <!-- Card 3: Ownership -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-key text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">Ownership System</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Every value in Rust has a unique owner variable. When that owner leaves its execution scope, memory is automatically freed immediately and deterministically.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Deterministic Resource Deallocation</span>
+                    </div>
+                </div>
+
+                <!-- Card 4: Borrowing -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-arrow-right-arrow-left text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">Borrowing & References</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Allows functions to access data via references without transferring ownership. The borrow checker enforces: any number of immutable references OR exactly one mutable reference.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Aliasing XOR Mutability</span>
+                    </div>
+                </div>
+
+                <!-- Card 5: Concurrency -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-network-wired text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">Safe Concurrency</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Eliminates data races through type system traits (<code class="text-xs font-mono text-rust-400">Send</code> and <code class="text-xs font-mono text-rust-400">Sync</code>), allowing developers to build massively parallel multi-threaded architectures fearlessly.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Data Races Blocked at Build Time</span>
+                    </div>
+                </div>
+
+                <!-- Card 6: Type Safety -->
+                <div class="group bg-tech-card hover:bg-tech-cardHover border border-tech-border hover:border-rust-500/50 rounded-2xl p-7 transition-all duration-300 hover:-translate-y-1 shadow-lg">
+                    <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 mb-6 group-hover:scale-110 transition-transform">
+                        <i class="fa-solid fa-cube text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-white mb-3 group-hover:text-rust-400 transition-colors">Strong Type Safety</h3>
+                    <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                        Combines rich algebraic data types (Enums with attached data), powerful pattern matching, generics, and traits, making invalid software states completely unrepresentable.
+                    </p>
+                    <div class="text-xs font-mono text-tech-muted flex items-center gap-1.5 pt-2 border-t border-tech-border/60">
+                        <i class="fa-solid fa-check text-emerald-400"></i>
+                        <span>Algebraic Data Types & Traits</span>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             6. RUST CODE EXAMPLE (Interactive Editor)
+             ========================================== -->
+        <section id="code-example" class="py-16 bg-tech-cardAlt/40 border-y border-tech-border">
+            <div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center mb-10">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-terminal text-xs"></i>
+                        <span>Syntax Showcase</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Rust in Action: Clean & Expressive
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        Explore idiomatic Rust code snippets with modern syntax and zero runtime overhead.
+                    </p>
+                </div>
+
+                <!-- Code Editor Container -->
+                <div class="bg-[#0b101b] border border-tech-border rounded-2xl shadow-2xl overflow-hidden">
+                    
+                    <!-- Editor Header Bar -->
+                    <div class="bg-tech-card px-4 sm:px-6 py-3 border-b border-tech-border flex flex-wrap items-center justify-between gap-3">
+                        
+                        <!-- Window Controls and Tab Buttons -->
+                        <div class="flex items-center gap-3 sm:gap-6">
+                            <!-- Mac-style Window Dots -->
+                            <div class="flex items-center gap-1.5">
+                                <span class="w-3 h-3 rounded-full bg-red-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-yellow-500 inline-block"></span>
+                                <span class="w-3 h-3 rounded-full bg-green-500 inline-block"></span>
+                            </div>
+
+                            <!-- Interactive Tab Selectors -->
+                            <div class="flex items-center gap-1 sm:gap-2">
+                                <button onclick="switchCodeTab('hello')" id="tab-hello" class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-white bg-tech-bg border border-rust-500/40 transition-all">
+                                    <i class="fa-brands fa-rust text-rust-500 mr-1.5"></i>main.rs
+                                </button>
+                                <button onclick="switchCodeTab('borrow')" id="tab-borrow" class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-white hover:bg-tech-bg/50 border border-transparent transition-all">
+                                    borrowing.rs
+                                </button>
+                                <button onclick="switchCodeTab('concurrency')" id="tab-concurrency" class="code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-white hover:bg-tech-bg/50 border border-transparent transition-all">
+                                    concurrency.rs
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Copy Button (JS Clipboard) -->
+                        <button id="copy-code-btn" onclick="copyActiveCode()" class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-lg bg-tech-cardAlt hover:bg-rust-600 text-slate-200 hover:text-white border border-tech-border hover:border-rust-500 text-xs font-mono transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-rust-500" aria-label="Copy Code to Clipboard">
+                            <i id="copy-icon" class="fa-regular fa-copy"></i>
+                            <span id="copy-text">Copy Code</span>
+                        </button>
+
+                    </div>
+
+                    <!-- Code Display Area -->
+                    <div class="p-6 sm:p-8 overflow-x-auto text-sm sm:text-base font-mono leading-relaxed bg-[#0a0f1d]">
+                        
+                        <!-- Snippet 1: Hello World (Default as requested) -->
+                        <pre id="code-snippet-hello" class="block"><code><span class="token-comment">// Standard Rust Entry Point</span>
+<span class="token-keyword">fn</span> <span class="token-function">main</span><span class="token-symbol">()</span> <span class="token-symbol">{</span>
+    <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"Hello, World!"</span><span class="token-symbol">);</span>
+<span class="token-symbol">}</span></code></pre>
+
+                        <!-- Snippet 2: Ownership & Borrowing Example -->
+                        <pre id="code-snippet-borrow" class="hidden"><code><span class="token-comment">// Ownership & Borrowing Demonstration</span>
+<span class="token-keyword">fn</span> <span class="token-function">main</span><span class="token-symbol">()</span> <span class="token-symbol">{</span>
+    <span class="token-keyword">let</span> <span class="token-keyword">mut</span> message = <span class="token-type">String</span>::<span class="token-function">from</span><span class="token-symbol">(</span><span class="token-string">"Hello"</span><span class="token-symbol">);</span>
+    
+    <span class="token-comment">// Borrow immutably</span>
+    <span class="token-keyword">let</span> len = <span class="token-function">calculate_length</span><span class="token-symbol">(&amp;</span>message<span class="token-symbol">);</span>
+    <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"Length of '{}' is {}"</span><span class="token-symbol">,</span> message<span class="token-symbol">,</span> len<span class="token-symbol">);</span>
+    
+    <span class="token-comment">// Borrow mutably</span>
+    <span class="token-function">append_world</span><span class="token-symbol">(&amp;</span><span class="token-keyword">mut</span> message<span class="token-symbol">);</span>
+    <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"Updated: {}"</span><span class="token-symbol">,</span> message<span class="token-symbol">);</span>
+<span class="token-symbol">}</span>
+
+<span class="token-keyword">fn</span> <span class="token-function">calculate_length</span><span class="token-symbol">(</span>s: <span class="token-symbol">&amp;</span><span class="token-type">String</span><span class="token-symbol">)</span> -&gt; <span class="token-type">usize</span> <span class="token-symbol">{</span>
+    s.<span class="token-function">len</span><span class="token-symbol">()</span>
+<span class="token-symbol">}</span>
+
+<span class="token-keyword">fn</span> <span class="token-function">append_world</span><span class="token-symbol">(</span>s: <span class="token-symbol">&amp;</span><span class="token-keyword">mut</span> <span class="token-type">String</span><span class="token-symbol">)</span> <span class="token-symbol">{</span>
+    s.<span class="token-function">push_str</span><span class="token-symbol">(</span><span class="token-string">", Rustaceans!"</span><span class="token-symbol">);</span>
+<span class="token-symbol">}</span></code></pre>
+
+                        <!-- Snippet 3: Fearless Concurrency -->
+                        <pre id="code-snippet-concurrency" class="hidden"><code><span class="token-keyword">use</span> std::thread<span class="token-symbol">;</span>
+<span class="token-keyword">use</span> std::time::Duration<span class="token-symbol">;</span>
+
+<span class="token-keyword">fn</span> <span class="token-function">main</span><span class="token-symbol">()</span> <span class="token-symbol">{</span>
+    <span class="token-keyword">let</span> handle = thread::<span class="token-function">spawn</span><span class="token-symbol">(||</span> <span class="token-symbol">{</span>
+        <span class="token-keyword">for</span> i <span class="token-keyword">in</span> <span class="token-symbol">1..=</span><span class="token-symbol">3</span> <span class="token-symbol">{</span>
+            <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"Spawned worker task count: {}"</span><span class="token-symbol">,</span> i<span class="token-symbol">);</span>
+            thread::<span class="token-function">sleep</span><span class="token-symbol">(</span>Duration::<span class="token-function">from_millis</span><span class="token-symbol">(</span><span class="token-symbol">10</span><span class="token-symbol">));</span>
+        <span class="token-symbol">}</span>
+    <span class="token-symbol">});</span>
+
+    <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"Main thread running concurrently..."</span><span class="token-symbol">);</span>
+    handle.<span class="token-function">join</span><span class="token-symbol">()</span>.<span class="token-function">unwrap</span><span class="token-symbol">();</span>
+    <span class="token-macro">println!</span><span class="token-symbol">(</span><span class="token-string">"All threads executed safely with zero races!"</span><span class="token-symbol">);</span>
+<span class="token-symbol">}</span></code></pre>
+
+                    </div>
+
+                    <!-- Editor Output Simulation Bar -->
+                    <div class="bg-tech-bg px-6 py-3 border-t border-tech-border flex items-center justify-between text-xs font-mono text-tech-muted">
+                        <div class="flex items-center gap-2">
+                            <span class="text-emerald-400 font-bold flex items-center gap-1.5">
+                                <i class="fa-solid fa-circle-check text-xs"></i> Compiled Successfully
+                            </span>
+                            <span class="text-slate-500">|</span>
+                            <span>Target: x86_64-unknown-linux-gnu</span>
+                        </div>
+                        <span class="text-rust-400">cargo run</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             7. RUST OWNERSHIP AND BORROWING (Visual Deep-Dive)
+             ========================================== -->
+        <section id="ownership-borrowing" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-diagram-project text-xs"></i>
+                    <span>Memory Model Architecture</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Understanding Ownership, Borrowing & Lifetimes
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    The revolutionary compile-time memory model that eliminates garbage collection while stopping memory corruption bugs entirely.
+                </p>
+            </div>
+
+            <!-- 4 Visual Architectural Cards -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                
+                <!-- Pillar 1: Ownership -->
+                <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/20 text-rust-400 flex items-center justify-center font-bold">
+                                01
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">The Three Rules of Ownership</h3>
+                                <span class="text-xs font-mono text-rust-400">Strict Memory Stewardship</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-rust-500 mt-1"></i>
+                                <span>Each value in Rust has an owner variable.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-rust-500 mt-1"></i>
+                                <span>There can only be <strong class="text-white">one owner at a time</strong>.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-rust-500 mt-1"></i>
+                                <span>When the owner goes out of scope, the value is <strong class="text-white">automatically dropped</strong>.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Mini Code Block -->
+                    <div class="bg-tech-bg rounded-xl p-4 border border-tech-border font-mono text-xs text-slate-300">
+                        <span class="token-keyword">let</span> s1 = <span class="token-type">String</span>::<span class="token-function">from</span>(<span class="token-string">"data"</span>);<br>
+                        <span class="token-keyword">let</span> s2 = s1; <span class="token-comment">// Ownership moves to s2!</span><br>
+                        <span class="token-comment">// s1 is now invalidated (no double-free bug)</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 2: Borrowing -->
+                <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/20 text-sky-400 flex items-center justify-center font-bold">
+                                02
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Borrowing via References</h3>
+                                <span class="text-xs font-mono text-sky-400">Passing Data Without Moving</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-2 text-sm text-slate-300 mb-6">
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-400 mt-1"></i>
+                                <span>Borrowing creates a reference using the <code class="text-rust-400 font-mono">&amp;</code> operator.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-400 mt-1"></i>
+                                <span>Immutable borrows (<code class="text-rust-400 font-mono">&amp;T</code>) allow read-only shared access.</span>
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <i class="fa-solid fa-circle-check text-sky-400 mt-1"></i>
+                                <span>Mutable borrows (<code class="text-rust-400 font-mono">&amp;mut T</code>) allow exclusive write access.</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Mini Code Block -->
+                    <div class="bg-tech-bg rounded-xl p-4 border border-tech-border font-mono text-xs text-slate-300">
+                        <span class="token-keyword">fn</span> <span class="token-function">inspect</span>(item: <span class="token-symbol">&amp;</span><span class="token-type">String</span>) {<br>
+                        &nbsp;&nbsp;<span class="token-macro">println!</span>(<span class="token-string">"Borrowed: {}"</span>, item);<br>
+                        } <span class="token-comment">// Original owner still owns item</span>
+                    </div>
+                </div>
+
+                <!-- Pillar 3: References Rule -->
+                <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                                03
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">The Golden Reference Invariant</h3>
+                                <span class="text-xs font-mono text-emerald-400">Aliasing XOR Mutability</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                            At any given point in program execution, you may have <strong class="text-white">either</strong> any number of immutable references (<code class="text-rust-400 font-mono">&amp;T</code>), <strong class="text-white">OR</strong> exactly one mutable reference (<code class="text-rust-400 font-mono">&amp;mut T</code>), but never both simultaneously.
+                        </p>
+                    </div>
+
+                    <!-- Visual Rule Badge -->
+                    <div class="bg-tech-bg rounded-xl p-4 border border-tech-border flex items-center justify-between text-xs font-mono">
+                        <div class="text-emerald-400">&amp;T + &amp;T + &amp;T = OK</div>
+                        <div class="text-slate-500">|</div>
+                        <div class="text-rust-400">&amp;mut T = Exclusive</div>
+                    </div>
+                </div>
+
+                <!-- Pillar 4: Lifetimes -->
+                <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 flex flex-col justify-between">
+                    <div>
+                        <div class="flex items-center gap-3 mb-4">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                                04
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-white">Lifetimes ('a)</h3>
+                                <span class="text-xs font-mono text-purple-400">Preventing Dangling References</span>
+                            </div>
+                        </div>
+                        <p class="text-sm text-slate-300 leading-relaxed mb-4">
+                            Lifetimes ensure that references never outlive the data they point to. The compiler uses lifetime annotations like <code class="text-rust-400 font-mono">&amp;'a str</code> to statically prove reference validity at compile time.
+                        </p>
+                    </div>
+
+                    <!-- Mini Code Block -->
+                    <div class="bg-tech-bg rounded-xl p-4 border border-tech-border font-mono text-xs text-slate-300">
+                        <span class="token-keyword">fn</span> <span class="token-function">longest</span>&lt;<span class="token-type">'a</span>&gt;(x: <span class="token-symbol">&amp;</span><span class="token-type">'a</span> <span class="token-type">str</span>, y: <span class="token-symbol">&amp;</span><span class="token-type">'a</span> <span class="token-type">str</span>) -&gt; <span class="token-symbol">&amp;</span><span class="token-type">'a</span> <span class="token-type">str</span> {<br>
+                        &nbsp;&nbsp;<span class="token-keyword">if</span> x.<span class="token-function">len</span>() &gt; y.<span class="token-function">len</span>() { x } <span class="token-keyword">else</span> { y }<br>
+                        }
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Visual Flow Diagram Built with HTML & Tailwind -->
+            <div class="bg-tech-card border border-tech-border rounded-2xl p-6 sm:p-8 shadow-xl">
+                <div class="text-center max-w-2xl mx-auto mb-8">
+                    <h3 class="text-lg sm:text-xl font-bold text-white">Visual Memory Scope & Deallocation Workflow</h3>
+                    <p class="text-xs sm:text-sm text-tech-muted mt-1">How Rust cleans up memory instantly when scope ends without a GC pause</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                    
+                    <div class="bg-tech-bg p-5 rounded-xl border border-tech-border flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-rust-500/20 text-rust-400 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-play text-sm"></i>
+                        </div>
+                        <div class="text-sm font-bold text-white mb-1">1. Scope Entry</div>
+                        <p class="text-xs text-tech-muted">Variable <code class="text-rust-400 font-mono">s</code> is created and allocated on the heap. <code class="text-rust-400 font-mono">s</code> is declared the sole owner.</p>
+                    </div>
+
+                    <div class="bg-tech-bg p-5 rounded-xl border border-tech-border flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-sky-500/20 text-sky-400 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-code-compare text-sm"></i>
+                        </div>
+                        <div class="text-sm font-bold text-white mb-1">2. Execution & Borrowing</div>
+                        <p class="text-xs text-tech-muted">Functions borrow references <code class="text-sky-400 font-mono">&amp;s</code>. Borrow checker tracks validity and bounds across execution.</p>
+                    </div>
+
+                    <div class="bg-tech-bg p-5 rounded-xl border border-tech-border flex flex-col items-center">
+                        <div class="w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center mb-3">
+                            <i class="fa-solid fa-trash-can text-sm"></i>
+                        </div>
+                        <div class="text-sm font-bold text-white mb-1">3. Deterministic Drop</div>
+                        <p class="text-xs text-tech-muted">Closing curly brace <code class="text-emerald-400 font-mono">}</code> reached. Rust calls <code class="text-emerald-400 font-mono">drop()</code> instantly, deallocating heap memory.</p>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             8. KEY FEATURES (Responsive Grid: 4 cols desktop, 2 tablet, 1 mobile)
+             ========================================== -->
+        <section id="features" class="py-16 sm:py-20 bg-tech-cardAlt/50 border-y border-tech-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-cubes-stacked text-xs"></i>
+                        <span>Technical Capabilities</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Key Architectural Features
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        Eight defining characteristics that power robust software engineering in Rust.
+                    </p>
+                </div>
+
+                <!-- 8 Features Responsive Grid: 4 cols on desktop, 2 on tablet, 1 on mobile -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    
+                    <!-- 1. Memory Safety -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-shield-halved text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Memory Safety</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Prevents segmentation faults, buffer overflows, and dangling pointers at compile time.
+                        </p>
+                    </div>
+
+                    <!-- 2. Zero-Cost Abstractions -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-gears text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Zero-Cost Abstractions</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            High-level constructs like iterators and closures compile down to assembly matching hand-written C.
+                        </p>
+                    </div>
+
+                    <!-- 3. High Performance -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-gauge-high text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">High Performance</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            No runtime virtual machine, no garbage collector, and optimized LLVM machine-code output.
+                        </p>
+                    </div>
+
+                    <!-- 4. Concurrency -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code-branch text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Safe Concurrency</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Strict compiler ownership checks prevent data races across multi-threaded operations.
+                        </p>
+                    </div>
+
+                    <!-- 5. Ownership -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-key text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Ownership System</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Deterministic variable lifecycles ensure memory is freed automatically upon scope exit.
+                        </p>
+                    </div>
+
+                    <!-- 6. Borrowing -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-handshake-angle text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Borrowing Rules</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Enforces safe sharing of pointers through compile-time read/write reference validation.
+                        </p>
+                    </div>
+
+                    <!-- 7. Type Safety -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-check-double text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Type Safety</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Rich expressive type system, type inference, traits, and strict null-safety wrappers.
+                        </p>
+                    </div>
+
+                    <!-- 8. Cross-Platform Development -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-globe text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Cross-Platform</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Target Windows, Linux, macOS, iOS, Android, Embedded microcontrollers, and WebAssembly seamlessly.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             9. ADVANTAGES AND DISADVANTAGES (Two Separate Sections)
+             ========================================== -->
+        <section id="advantages-disadvantages" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-scale-balanced text-xs"></i>
+                    <span>Balanced Evaluation</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Advantages & Trade-offs
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    An objective engineering appraisal of Rust's strengths and practical adoption challenges.
+                </p>
+            </div>
+
+            <!-- Two Distinct Panels Grid -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+                
+                <!-- Section A: Advantages (Check-circle icons) -->
+                <div class="bg-tech-card border border-tech-border rounded-3xl p-6 sm:p-8 shadow-xl">
+                    <div class="flex items-center gap-3 pb-6 border-b border-tech-border mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 shrink-0">
+                            <i class="fa-solid fa-circle-check text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Key Advantages</h3>
+                            <p class="text-xs text-tech-muted">Why engineering teams choose Rust for critical systems</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Memory Safety Without Garbage Collection</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Eliminates buffer overflows, null dereferencing, and memory leaks before deployment.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">High Performance & Low Latency</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Predictable real-time execution speeds matching bare-metal C with low memory footprints.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Reliable & Resilient Applications</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Explicit error handling via Result types prevents unexpected system crashes in production.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Safe Concurrency (No Data Races)</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Multi-threaded concurrent execution validated at build time through type system bounds.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Modern Development Tools</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">First-class package manager (Cargo), linter (Clippy), formatter (rustfmt), and test suite.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-circle-check text-emerald-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Excellent Compiler Diagnostics</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">The rustc compiler provides clear, friendly error messages with actionable code fixes.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+
+                <!-- Section B: Disadvantages (Warning icons) -->
+                <div class="bg-tech-card border border-tech-border rounded-3xl p-6 sm:p-8 shadow-xl">
+                    <div class="flex items-center gap-3 pb-6 border-b border-tech-border mb-6">
+                        <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                            <i class="fa-solid fa-triangle-exclamation text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-bold text-white">Disadvantages & Trade-offs</h3>
+                            <p class="text-xs text-tech-muted">Practical considerations and learning hurdles</p>
+                        </div>
+                    </div>
+
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Steep Learning Curve</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Mastering ownership, borrowing semantics, and explicit lifetime annotations requires significant time and mental paradigm shift.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Ownership Can Be Difficult Initially</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Beginners often spend significant time "fighting the borrow checker" before internalizing Rust design patterns.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Compilation Can Sometimes Be Slower</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">Deep monomorphization, exhaustive borrow analysis, and LLVM optimization passes result in longer compile times than Go or C.</p>
+                            </div>
+                        </li>
+
+                        <li class="flex items-start gap-3 bg-tech-bg/60 p-4 rounded-xl border border-tech-border/80">
+                            <i class="fa-solid fa-triangle-exclamation text-amber-400 mt-1 text-base"></i>
+                            <div>
+                                <h4 class="text-sm font-bold text-white">Smaller Ecosystem Compared With Older Languages</h4>
+                                <p class="text-xs text-slate-300 mt-0.5">While crates.io is expanding rapidly, mature domain-specific libraries (e.g. specialized GUI or legacy enterprise tooling) are fewer than Java, C++, or Python.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             10. APPLICATIONS OF RUST (10 Application Cards)
+             ========================================== -->
+        <section id="applications" class="py-16 sm:py-20 bg-tech-cardAlt/50 border-y border-tech-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-layer-group text-xs"></i>
+                        <span>Industry Deployment</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Real-World Applications of Rust
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        From cloud hypervisors to browser runtimes, explore ten domains revolutionized by Rust.
+                    </p>
+                </div>
+
+                <!-- 10 Application Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-6">
+                    
+                    <!-- 1. Web Development -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-globe text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Web Development</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                High-throughput web applications with frameworks like Actix-web, Axum, and Rocket delivering millions of requests per second.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-rust-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Actix / Axum</span>
+                    </div>
+
+                    <!-- 2. Backend Development -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-server text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Backend Services</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Resilient microservices, API gateways, database engines, and high-concurrency event processors using Tokio asynchronous runtime.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-emerald-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Tokio Async</span>
+                    </div>
+
+                    <!-- 3. Cloud Computing -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-cloud text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Cloud Computing</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                MicroVMs and serverless isolation layers like AWS Firecracker, cloud runtimes, and distributed infrastructure nodes.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-rust-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">AWS Firecracker</span>
+                    </div>
+
+                    <!-- 4. Operating Systems -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-purple-500/10 border border-purple-500/20 flex items-center justify-center text-purple-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-desktop text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Operating Systems</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Core Linux Kernel modules, Google Fuchsia components, and independent pure-Rust OS projects like Redox OS.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-purple-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Linux Kernel / Redox</span>
+                    </div>
+
+                    <!-- 5. Embedded Systems -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-microchip text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Embedded Systems</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Microcontroller programming (ARM Cortex, RISC-V, ESP32) with <code class="text-rust-400">#![no_std]</code> mode for IoT devices and automotive ECUs.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-amber-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">#![no_std] IoT</span>
+                    </div>
+
+                    <!-- 6. Blockchain -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-link text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Blockchain</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                The dominant language for smart contracts and core validator nodes across Solana, Polkadot (Substrate), and Near Protocol.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-rose-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Solana / Polkadot</span>
+                    </div>
+
+                    <!-- 7. Game Development -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-gamepad text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Game Engines</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Data-driven game engines like Bevy and Fyrox leveraging ECS (Entity Component System) and cross-platform WGPU shaders.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-indigo-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Bevy / WGPU</span>
+                    </div>
+
+                    <!-- 8. Cybersecurity -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-user-shield text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Cybersecurity</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Memory-safe cryptographic libraries, reverse engineering suites, packet sniffers, and zero-day defense appliances.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-teal-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">Cryptography / Sec</span>
+                    </div>
+
+                    <!-- 9. Command-Line Tools -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-lime-500/10 border border-lime-500/20 flex items-center justify-center text-lime-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-terminal text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">Command-Line Tools</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Blazingly fast developer utilities replacing legacy tools: ripgrep (grep), bat (cat), starship (prompt), and exa/eza (ls).
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-lime-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">ripgrep / bat</span>
+                    </div>
+
+                    <!-- 10. WebAssembly -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group flex flex-col justify-between">
+                        <div>
+                            <div class="w-12 h-12 rounded-xl bg-orange-500/10 border border-orange-500/20 flex items-center justify-center text-orange-400 mb-4 group-hover:scale-110 transition-transform">
+                                <i class="fa-solid fa-puzzle-piece text-xl"></i>
+                            </div>
+                            <h3 class="text-base font-bold text-white mb-2">WebAssembly (WASM)</h3>
+                            <p class="text-xs text-slate-300 leading-relaxed mb-4">
+                                Compiling heavy computation directly into browsers with near-native speed using wasm-bindgen and wasm-pack.
+                            </p>
+                        </div>
+                        <span class="text-[11px] font-mono text-orange-400 bg-tech-bg px-2 py-1 rounded border border-tech-border self-start">wasm-pack</span>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             11 & 12. COMPARISONS (Rust vs C++ & Rust vs Python)
+             ========================================== -->
+        <section id="comparisons" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-code-compare text-xs"></i>
+                    <span>Language Benchmarks</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Technical Comparisons
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    How Rust stacks up against industry giants C++ and Python in memory management, speed, and developer ergonomics.
+                </p>
+            </div>
+
+            <!-- 11. Rust vs C++ Comparison Table -->
+            <div class="bg-tech-card border border-tech-border rounded-3xl p-6 sm:p-8 shadow-xl mb-16">
+                <div class="flex items-center gap-3 pb-6 border-b border-tech-border mb-6">
+                    <div class="w-12 h-12 rounded-2xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400 shrink-0">
+                        <i class="fa-solid fa-scale-balanced text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white">Rust vs C++: Systems Architecture Face-Off</h3>
+                        <p class="text-xs text-tech-muted">Comparative breakdown across core systems engineering criteria</p>
+                    </div>
+                </div>
+
+                <!-- Responsive Table Wrapper -->
+                <div class="overflow-x-auto -mx-6 sm:mx-0">
+                    <div class="inline-block min-w-full align-middle px-6 sm:px-0">
+                        <table class="min-w-full divide-y divide-tech-border text-left">
+                            <thead>
+                                <tr class="bg-tech-cardAlt">
+                                    <th scope="col" class="py-4 px-4 text-xs font-bold uppercase tracking-wider text-tech-muted">Feature</th>
+                                    <th scope="col" class="py-4 px-4 text-xs font-bold uppercase tracking-wider text-rust-400">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-brands fa-rust text-base"></i> Rust
+                                        </div>
+                                    </th>
+                                    <th scope="col" class="py-4 px-4 text-xs font-bold uppercase tracking-wider text-sky-400">
+                                        <div class="flex items-center gap-2">
+                                            <i class="fa-solid fa-c text-base"></i> C++
+                                        </div>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-tech-border text-sm">
+                                
+                                <!-- Row 1: Performance -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Performance</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-check text-xs"></i> Excellent (LLVM Optimized)
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-check text-xs"></i> Excellent (Native Bare-Metal)
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 2: Memory Safety -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Memory Safety</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-shield-halved text-xs"></i> Strong (Compile-time verified)
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-triangle-exclamation text-xs"></i> Manual (Vulnerable to exploits)
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 3: Memory Management -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Memory Management</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="text-xs font-mono text-rust-400 bg-tech-bg px-2 py-1 rounded border border-tech-border">Ownership system (No GC)</span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="text-xs font-mono text-slate-300 bg-tech-bg px-2 py-1 rounded border border-tech-border">Manual (new/delete) / RAII smart pointers</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 4: Concurrency Safety -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Concurrency Safety</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-check text-xs"></i> Strong (Data races caught at build)
+                                        </span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-amber-500/10 text-amber-400 border border-amber-500/20 text-xs font-medium">
+                                            <i class="fa-solid fa-triangle-exclamation text-xs"></i> More developer responsibility
+                                        </span>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 5: Learning Curve -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Learning Curve</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="text-xs text-amber-300 font-medium">Steep (Borrow checker rules)</span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="text-xs text-amber-300 font-medium">Steep (Complex legacy features)</span>
+                                    </td>
+                                </tr>
+
+                                <!-- Row 6: Use Cases -->
+                                <tr class="hover:bg-tech-bg/50 transition-colors">
+                                    <td class="py-4 px-4 font-semibold text-white">Use Cases</td>
+                                    <td class="py-4 px-4 text-slate-200">
+                                        <span class="text-xs text-slate-200">Systems, Web, Cloud, WebAssembly, Security</span>
+                                    </td>
+                                    <td class="py-4 px-4 text-slate-300">
+                                        <span class="text-xs text-slate-300">Systems, AAA Games, Embedded, Legacy Enterprise</span>
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- 12. Rust vs Python Comparison Grid -->
+            <div class="bg-tech-card border border-tech-border rounded-3xl p-6 sm:p-8 shadow-xl">
+                <div class="flex items-center gap-3 pb-6 border-b border-tech-border mb-8">
+                    <div class="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 shrink-0">
+                        <i class="fa-solid fa-right-left text-xl"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-xl sm:text-2xl font-bold text-white">Rust vs Python: Systems vs Scripting Dynamics</h3>
+                        <p class="text-xs text-tech-muted">Direct analysis across execution speed, cognitive load, and software domains</p>
+                    </div>
+                </div>
+
+                <!-- 7 Python Comparison Points Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    
+                    <!-- 1. Performance -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">1. Performance</span>
+                            <i class="fa-solid fa-gauge text-rust-500"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> 10x to 100x faster, CPU-bound near bare metal.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Interpreted bytecode with GIL overhead; slower raw execution.</div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Ease of Learning -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">2. Ease of Learning</span>
+                            <i class="fa-solid fa-graduation-cap text-sky-400"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> Higher initial complexity due to strict compiler rules.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Extremely beginner-friendly, readable, pseudo-code syntax.</div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Memory Management -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">3. Memory Management</span>
+                            <i class="fa-solid fa-microchip text-emerald-400"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> Compile-time ownership, deterministic instant free.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Automatic reference counting + cyclic garbage collector.</div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Development Speed -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">4. Development Speed</span>
+                            <i class="fa-solid fa-stopwatch text-amber-400"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> Slower prototyping, but virtually zero production maintenance bugs.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Rapid prototyping and instant script execution.</div>
+                        </div>
+                    </div>
+
+                    <!-- 5. Web Development -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">5. Web Development</span>
+                            <i class="fa-solid fa-globe text-purple-400"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> Ultra-fast microservices handling massive connection density.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Rich ecosystem (Django, FastAPI, Flask) for rapid feature builds.</div>
+                        </div>
+                    </div>
+
+                    <!-- 6. Systems Programming -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">6. Systems Programming</span>
+                            <i class="fa-solid fa-terminal text-teal-400"></i>
+                        </div>
+                        <div class="space-y-2 text-xs">
+                            <div class="text-rust-400 font-medium"><strong class="text-white">Rust:</strong> Native fit for OS kernels, drivers, and low-level servers.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python:</strong> Unsuitable for OS kernels or bare-metal embedded targets.</div>
+                        </div>
+                    </div>
+
+                    <!-- 7. Data Science (Spans full on large) -->
+                    <div class="bg-tech-bg p-5 rounded-2xl border border-tech-border md:col-span-2 lg:col-span-3">
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="text-sm font-bold text-white">7. Data Science & Machine Learning</span>
+                            <i class="fa-solid fa-brain text-rose-400"></i>
+                        </div>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-xs">
+                            <div class="text-rust-400"><strong class="text-white">Rust Role:</strong> Powers blazing-fast backend engines (e.g. Polars DataFrame engine, HuggingFace Tokenizers, Burn ML) that Python calls under the hood.</div>
+                            <div class="text-slate-400"><strong class="text-white">Python Role:</strong> Unrivaled leader for ML experimentation, Jupyter notebooks, PyTorch, and interactive data visualization.</div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             13. RUST CAREER OPPORTUNITIES (7 Career Cards)
+             ========================================== -->
+        <section id="career" class="py-16 sm:py-20 bg-tech-cardAlt/50 border-y border-tech-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-briefcase text-xs"></i>
+                        <span>Industry Demand</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        Rust Career Opportunities
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        High-demand career tracks offering top-tier compensation for systems engineers proficient in Rust.
+                    </p>
+                </div>
+
+                <!-- 7 Career Cards Grid -->
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    
+                    <!-- 1. Rust Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-rust-500/10 border border-rust-500/20 flex items-center justify-center text-rust-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-code text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Core Rust Developer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Builds high-reliability software architectures, custom internal tooling, SDKs, and foundational business logic.
+                        </p>
+                        <div class="text-xs font-mono text-rust-400 pt-2 border-t border-tech-border/60">
+                            High Market Demand
+                        </div>
+                    </div>
+
+                    <!-- 2. Backend Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center text-emerald-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-server text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Backend Engineer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Architects ultra-low latency REST/gRPC microservices, message streaming queues, and high-load web backends.
+                        </p>
+                        <div class="text-xs font-mono text-emerald-400 pt-2 border-t border-tech-border/60">
+                            Tokio / Axum Stack
+                        </div>
+                    </div>
+
+                    <!-- 3. Systems Programmer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center text-sky-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-terminal text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Systems Programmer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Works on operating system kernels, hypervisors, file systems, device drivers, and low-level memory controllers.
+                        </p>
+                        <div class="text-xs font-mono text-sky-400 pt-2 border-t border-tech-border/60">
+                            Kernel & Hypervisors
+                        </div>
+                    </div>
+
+                    <!-- 4. Blockchain Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center text-rose-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cubes text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Blockchain Engineer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Develops secure smart contracts, decentralized applications (dApps), and consensus engines for Solana and Polkadot.
+                        </p>
+                        <div class="text-xs font-mono text-rose-400 pt-2 border-t border-tech-border/60">
+                            Top Compensation Tier
+                        </div>
+                    </div>
+
+                    <!-- 5. Embedded Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center text-amber-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-microchip text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Embedded Developer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Programs resource-constrained microcontrollers, IoT sensors, robotics, and safety-critical automotive systems.
+                        </p>
+                        <div class="text-xs font-mono text-amber-400 pt-2 border-t border-tech-border/60">
+                            Robotics & IoT
+                        </div>
+                    </div>
+
+                    <!-- 6. Cloud Infrastructure Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group">
+                        <div class="w-12 h-12 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center text-indigo-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-cloud-arrow-up text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">Cloud Infra Engineer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Builds scalable serverless runtimes, container engines, service meshes, and distributed storage infrastructure.
+                        </p>
+                        <div class="text-xs font-mono text-indigo-400 pt-2 border-t border-tech-border/60">
+                            AWS / Azure / GCP
+                        </div>
+                    </div>
+
+                    <!-- 7. WebAssembly Developer -->
+                    <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 group sm:col-span-2 lg:col-span-3 xl:col-span-2">
+                        <div class="w-12 h-12 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center text-teal-400 mb-4 group-hover:scale-110 transition-transform">
+                            <i class="fa-solid fa-puzzle-piece text-xl"></i>
+                        </div>
+                        <h3 class="text-lg font-bold text-white mb-2">WebAssembly Engineer</h3>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed mb-4">
+                            Brings compute-heavy algorithms (video encoding, 3D graphics rendering, computer vision) directly into client web browsers.
+                        </p>
+                        <div class="text-xs font-mono text-teal-400 pt-2 border-t border-tech-border/60">
+                            Edge Computing & Browser
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             14. HOW TO LEARN RUST (10-Step Visual Learning Roadmap)
+             ========================================== -->
+        <section id="roadmap" class="py-16 sm:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center max-w-3xl mx-auto mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-map-location-dot text-xs"></i>
+                    <span>Step-by-Step Curriculum</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    How to Learn Rust: Complete 10-Step Roadmap
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    A structured, progressive pathway from programming fundamentals to production-grade advanced systems development.
+                </p>
+            </div>
+
+            <!-- 10 Steps Responsive Grid / Timeline -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6">
+                
+                <!-- Step 1 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">01</span>
+                            <i class="fa-solid fa-laptop-code text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Fundamentals</h3>
+                        <p class="text-xs text-tech-muted">Variables, basic types, functions, control flow (if/loop/match), and compiler setup via rustup.</p>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">02</span>
+                            <i class="fa-solid fa-code text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Rust Syntax</h3>
+                        <p class="text-xs text-tech-muted">Understand mutability (`mut`), shadowing, scalar vs compound types, and string slices (`&str` vs `String`).</p>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">03</span>
+                            <i class="fa-solid fa-key text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Learn Ownership</h3>
+                        <p class="text-xs text-tech-muted">Internalize move semantics, stack vs heap allocation, and automatic memory deallocation rules.</p>
+                    </div>
+                </div>
+
+                <!-- Step 4 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">04</span>
+                            <i class="fa-solid fa-arrow-right-arrow-left text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Learn Borrowing</h3>
+                        <p class="text-xs text-tech-muted">Master references (`&`), mutable references (`&mut`), and the strict Aliasing XOR Mutability rule.</p>
+                    </div>
+                </div>
+
+                <!-- Step 5 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">05</span>
+                            <i class="fa-solid fa-cubes text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Structs & Enums</h3>
+                        <p class="text-xs text-tech-muted">Define custom data structures, implement methods (`impl`), and leverage Option & algebraic Enums.</p>
+                    </div>
+                </div>
+
+                <!-- Step 6 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">06</span>
+                            <i class="fa-solid fa-triangle-exclamation text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Error Handling</h3>
+                        <p class="text-xs text-tech-muted">Master recoverable errors with `Result<T, E>`, the `?` propagation operator, and custom error types.</p>
+                    </div>
+                </div>
+
+                <!-- Step 7 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">07</span>
+                            <i class="fa-solid fa-shapes text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Traits & Generics</h3>
+                        <p class="text-xs text-tech-muted">Implement shared behavior with Traits, trait bounds, generic parameters, and standard derives.</p>
+                    </div>
+                </div>
+
+                <!-- Step 8 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">08</span>
+                            <i class="fa-solid fa-bolt text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Async Rust</h3>
+                        <p class="text-xs text-tech-muted">Explore `async/await`, Future polling mechanics, Tokio runtime, channels (mpsc), and tasks.</p>
+                    </div>
+                </div>
+
+                <!-- Step 9 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">09</span>
+                            <i class="fa-solid fa-hammer text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Build Projects</h3>
+                        <p class="text-xs text-tech-muted">Construct real-world projects: a CLI search utility, a REST API with Axum, and a WebAssembly tool.</p>
+                    </div>
+                </div>
+
+                <!-- Step 10 -->
+                <div class="bg-tech-card border border-tech-border hover:border-rust-500/50 rounded-2xl p-5 flex flex-col justify-between transition-all duration-200">
+                    <div>
+                        <div class="flex items-center justify-between mb-3">
+                            <span class="w-8 h-8 rounded-lg bg-rust-600 text-white font-mono font-bold text-xs flex items-center justify-center">10</span>
+                            <i class="fa-solid fa-microchip text-rust-400"></i>
+                        </div>
+                        <h3 class="text-sm font-bold text-white mb-1.5">Advanced Rust</h3>
+                        <p class="text-xs text-tech-muted">Dive into `unsafe` code blocks, raw pointers, FFI bindings, procedural macros, and OS development.</p>
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             15. FUTURE OF RUST (Next-Gen Computing Deep-Dive)
+             ========================================== -->
+        <section id="future" class="py-16 sm:py-20 bg-tech-cardAlt/50 border-y border-tech-border">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <!-- Section Header -->
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                        <i class="fa-solid fa-compass text-xs"></i>
+                        <span>Future Trajectory</span>
+                    </div>
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                        The Future of Rust Across Global Computing
+                    </h2>
+                    <p class="text-tech-muted text-base mt-2">
+                        How Rust is positioned to be the foundational backbone for the next 30 years of secure technological infrastructure.
+                    </p>
+                </div>
+
+                <!-- 7 Future Domains Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+                    
+                    <!-- 1. Cloud Infrastructure -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rust-500/10 text-rust-400 flex items-center justify-center">
+                                <i class="fa-solid fa-cloud text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Cloud Infrastructure</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            With energy efficiency and sustainability becoming paramount, Rust's minimal CPU cycles and tiny memory footprints drastically reduce data center operational costs and carbon footprints.
+                        </p>
+                    </div>
+
+                    <!-- 2. Cybersecurity -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-emerald-500/10 text-emerald-400 flex items-center justify-center">
+                                <i class="fa-solid fa-shield-cat text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Government & Cybersecurity</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            The US White House, CISA, and NSA have formally advised federal agencies to migrate to memory-safe languages. Rust is the primary target for replacing mission-critical legacy C code.
+                        </p>
+                    </div>
+
+                    <!-- 3. WebAssembly -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-sky-500/10 text-sky-400 flex items-center justify-center">
+                                <i class="fa-solid fa-puzzle-piece text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">WebAssembly & Edge</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            WebAssembly (WASI) enables secure, sandboxed serverless execution at the CDN edge with sub-millisecond cold starts, powered almost entirely by Rust compilation tooling.
+                        </p>
+                    </div>
+
+                    <!-- 4. Blockchain & Web3 -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-rose-500/10 text-rose-400 flex items-center justify-center">
+                                <i class="fa-solid fa-link text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Decentralized Systems</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            Smart contracts governing billions in financial assets require mathematical safety guarantees. Rust is permanently entrenched as the premier language for high-throughput blockchains.
+                        </p>
+                    </div>
+
+                    <!-- 5. Operating Systems -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-purple-500/10 text-purple-400 flex items-center justify-center">
+                                <i class="fa-solid fa-desktop text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Next-Gen Operating Systems</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            As Linux, Android, and Windows actively merge Rust code into kernel spaces, new operating systems are being built from the ground up with 100% memory safety.
+                        </p>
+                    </div>
+
+                    <!-- 6. Embedded & Automotive -->
+                    <div class="bg-tech-card border border-tech-border rounded-2xl p-6 space-y-3">
+                        <div class="flex items-center gap-3">
+                            <div class="w-10 h-10 rounded-xl bg-amber-500/10 text-amber-400 flex items-center justify-center">
+                                <i class="fa-solid fa-car text-lg"></i>
+                            </div>
+                            <h3 class="text-lg font-bold text-white">Automotive & Aerospace</h3>
+                        </div>
+                        <p class="text-xs sm:text-sm text-slate-300 leading-relaxed">
+                            With ISO 26262 automotive qualification standards evolving, Rust is rapidly replacing C for autonomous driving algorithms, flight avionics, and medical equipment.
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+
+
+        <!-- ==========================================
+             16. FAQ ACCORDION (Interactive JavaScript Accordion)
+             ========================================== -->
+        <section id="faq" class="py-16 sm:py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            
+            <!-- Section Header -->
+            <div class="text-center mb-16">
+                <div class="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-rust-500/10 border border-rust-500/20 text-xs font-semibold text-rust-400 uppercase tracking-wider mb-3">
+                    <i class="fa-solid fa-circle-question text-xs"></i>
+                    <span>Common Inquiries</span>
+                </div>
+                <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-tech-muted text-base mt-2">
+                    Answers to the most common questions about learning, adopting, and engineering with Rust.
+                </p>
+            </div>
+
+            <!-- Accordion Items Container -->
+            <div class="space-y-4" id="faq-accordion">
+                
+                <!-- Q1: What is Rust? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">1. What is Rust?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Rust is a modern systems programming language created by Mozilla Research that emphasizes performance, memory safety, and reliable concurrency without relying on a garbage collector.
+                    </div>
+                </div>
+
+                <!-- Q2: Is Rust difficult to learn? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">2. Is Rust difficult to learn?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Rust has a steeper initial learning curve than scripting languages like Python or JavaScript because it requires developers to explicitly understand ownership, borrowing, and memory lifecycles. However, once mastered, the friendly compiler and tooling make writing robust code extremely productive.
+                    </div>
+                </div>
+
+                <!-- Q3: Is Rust better than C++? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">3. Is Rust better than C++?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Rust provides comparable bare-metal execution performance to C++ while automatically preventing the 70% of security vulnerabilities caused by manual memory management. C++ maintains a larger legacy codebase in AAA gaming and desktop GUI, but new systems projects increasingly favor Rust for its safety guarantees.
+                    </div>
+                </div>
+
+                <!-- Q4: Is Rust good for beginners? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">4. Is Rust good for beginners?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        While complete programming novices usually begin with Python or JavaScript, learning Rust as a first systems language provides an exceptionally deep understanding of computer architecture, memory allocation, and concurrency without the undefined behaviors common in C.
+                    </div>
+                </div>
+
+                <!-- Q5: Can Rust be used for web development? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">5. Can Rust be used for web development?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Yes! Rust is extensively used for web development in two ways: On the backend via high-speed asynchronous frameworks like Axum and Actix-web, and on the frontend by compiling heavy client-side computation into WebAssembly modules.
+                    </div>
+                </div>
+
+                <!-- Q6: Is Rust good for backend development? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">6. Is Rust good for backend development?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Rust is outstanding for backend microservices that handle high throughput, strict low-latency requirements, and compute-heavy workloads. Its minimal memory footprint translates directly to lower cloud server hosting costs.
+                    </div>
+                </div>
+
+                <!-- Q7: Is Rust a good career choice? -->
+                <div class="faq-item bg-tech-card border border-tech-border rounded-2xl overflow-hidden transition-all">
+                    <button class="faq-toggle w-full p-6 text-left flex items-center justify-between gap-4 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span class="font-bold text-white text-base sm:text-lg">7. Is Rust a good career choice?</span>
+                        <div class="faq-icon-wrapper w-8 h-8 rounded-lg bg-tech-cardAlt flex items-center justify-center text-rust-400 shrink-0">
+                            <i class="fa-solid fa-plus faq-icon transition-transform duration-200"></i>
+                        </div>
+                    </button>
+                    <div class="faq-content hidden px-6 pb-6 text-sm text-slate-300 leading-relaxed border-t border-tech-border/50 pt-4">
+                        Rust developers consistently rank among the highest-paid software engineers globally according to developer surveys. The rapid adoption by Big Tech (Microsoft, Google, Amazon, Meta) and blockchain ecosystems ensures massive long-term career growth.
+                    </div>
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ==========================================
+             17. CONCLUSION & CALL TO ACTION
+             ========================================== -->
+        <section class="py-20 bg-gradient-to-b from-tech-cardAlt to-tech-bg border-t border-tech-border relative overflow-hidden">
+            <div class="absolute inset-0 bg-rust-600/5 blur-[120px] pointer-events-none"></div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-8">
+                
+                <div class="w-16 h-16 rounded-3xl bg-gradient-to-tr from-rust-600 to-rust-500 flex items-center justify-center mx-auto shadow-xl shadow-rust-600/30">
+                    <i class="fa-brands fa-rust text-3xl text-white"></i>
+                </div>
+
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white tracking-tight leading-tight">
+                    The Future of High-Assurance Computing Belongs to Rust
+                </h2>
+
+                <p class="text-base sm:text-lg text-slate-300 max-w-2xl mx-auto leading-relaxed">
+                    Rust has irrevocably shifted how the technology industry approaches systems engineering. By fusing uncompromising hardware performance with mathematical compile-time memory safety, Rust empowers developers to construct software that is fast, safe, and built to last.
+                </p>
+
+                <!-- CTA Button -->
+                <div class="pt-4">
+                    <a href="https://www.rust-lang.org/learn" target="_blank" rel="noopener noreferrer" class="inline-flex items-center justify-center gap-3 px-10 py-5 rounded-2xl bg-rust-600 hover:bg-rust-500 text-white font-bold text-lg transition-all duration-200 shadow-xl shadow-rust-600/30 hover:shadow-rust-600/50 hover:-translate-y-1 focus:outline-none focus:ring-2 focus:ring-rust-500">
+                        <span>Start Your Rust Journey</span>
+                        <i class="fa-solid fa-arrow-right text-base"></i>
+                    </a>
+                </div>
+
+                <div class="text-xs font-mono text-tech-muted">
+                    Official Documentation • The Rust Book • Rust By Example
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         18. FOOTER (Professional Dark Footer)
+         ========================================== -->
+    <footer class="bg-[#060910] border-t border-tech-border text-slate-400 text-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10">
+                
+                <!-- Col 1: Brand & About (2 cols on lg) -->
+                <div class="lg:col-span-2 space-y-4">
+                    <div class="flex items-center gap-3">
+                        <div class="w-9 h-9 rounded-xl bg-rust-600 flex items-center justify-center text-white shadow-md shadow-rust-600/20">
+                            <i class="fa-brands fa-rust text-xl"></i>
+                        </div>
+                        <span class="text-xl font-bold text-white tracking-tight">RustTech Insights</span>
+                    </div>
+                    <p class="text-xs sm:text-sm text-tech-muted leading-relaxed max-w-sm">
+                        An authoritative educational engineering guide dedicated to the Rust programming language, memory safety architectures, and modern systems software design.
+                    </p>
+                    <!-- Developer Social Links -->
+                    <div class="flex items-center gap-3 pt-2">
+                        <a href="https://github.com/rust-lang" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center text-slate-400 hover:text-white hover:border-rust-500 transition-colors" aria-label="GitHub">
+                            <i class="fa-brands fa-github text-sm"></i>
+                        </a>
+                        <a href="https://discord.com/invite/rust-lang" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center text-slate-400 hover:text-white hover:border-rust-500 transition-colors" aria-label="Discord">
+                            <i class="fa-brands fa-discord text-sm"></i>
+                        </a>
+                        <a href="https://twitter.com/rustlang" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center text-slate-400 hover:text-white hover:border-rust-500 transition-colors" aria-label="Twitter">
+                            <i class="fa-brands fa-x-twitter text-sm"></i>
+                        </a>
+                        <a href="https://crates.io" target="_blank" rel="noopener noreferrer" class="w-9 h-9 rounded-lg bg-tech-card border border-tech-border flex items-center justify-center text-slate-400 hover:text-white hover:border-rust-500 transition-colors" aria-label="Crates.io">
+                            <i class="fa-solid fa-box-open text-sm"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Col 2: Navigation & About Links -->
+                <div class="space-y-3">
+                    <div class="text-xs font-bold uppercase tracking-wider text-white">About & Language</div>
+                    <ul class="space-y-2 text-xs text-tech-muted">
+                        <li><a href="#about" class="hover:text-rust-400 transition-colors">Origins of Rust</a></li>
+                        <li><a href="#what-is-rust" class="hover:text-rust-400 transition-colors">What is Rust?</a></li>
+                        <li><a href="#why-popular" class="hover:text-rust-400 transition-colors">Why Rust is Popular</a></li>
+                        <li><a href="#features" class="hover:text-rust-400 transition-colors">Language Features</a></li>
+                        <li><a href="https://foundation.rust-lang.org/" target="_blank" rel="noopener noreferrer" class="hover:text-rust-400 transition-colors">Rust Foundation</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 3: Learning & Resources -->
+                <div class="space-y-3">
+                    <div class="text-xs font-bold uppercase tracking-wider text-white">Resources & Tools</div>
+                    <ul class="space-y-2 text-xs text-tech-muted">
+                        <li><a href="https://doc.rust-lang.org/book/" target="_blank" rel="noopener noreferrer" class="hover:text-rust-400 transition-colors">The Rust Book</a></li>
+                        <li><a href="https://doc.rust-lang.org/rust-by-example/" target="_blank" rel="noopener noreferrer" class="hover:text-rust-400 transition-colors">Rust by Example</a></li>
+                        <li><a href="https://crates.io/" target="_blank" rel="noopener noreferrer" class="hover:text-rust-400 transition-colors">crates.io Registry</a></li>
+                        <li><a href="https://play.rust-lang.org/" target="_blank" rel="noopener noreferrer" class="hover:text-rust-400 transition-colors">Rust Playground</a></li>
+                        <li><a href="#code-example" class="hover:text-rust-400 transition-colors">Interactive Examples</a></li>
+                    </ul>
+                </div>
+
+                <!-- Col 4: Careers & Roadmap -->
+                <div class="space-y-3">
+                    <div class="text-xs font-bold uppercase tracking-wider text-white">Careers & Roadmap</div>
+                    <ul class="space-y-2 text-xs text-tech-muted">
+                        <li><a href="#career" class="hover:text-rust-400 transition-colors">Career Pathways</a></li>
+                        <li><a href="#roadmap" class="hover:text-rust-400 transition-colors">10-Step Roadmap</a></li>
+                        <li><a href="#comparisons" class="hover:text-rust-400 transition-colors">Rust vs C++ & Python</a></li>
+                        <li><a href="#future" class="hover:text-rust-400 transition-colors">Future of Computing</a></li>
+                        <li><a href="#faq" class="hover:text-rust-400 transition-colors">FAQ Knowledgebase</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <!-- Bottom Legal & Copyright Bar -->
+            <div class="mt-12 pt-8 border-t border-tech-border flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-tech-subtle">
+                <div>
+                    &copy; 2026 RustTech Engineering Article. Created for academic, portfolio, and developer education purposes.
+                </div>
+                <div class="flex items-center gap-4">
+                    <span>Clean HTML5 & Tailwind CSS</span>
+                    <span>•</span>
+                    <span>No Emojis Policy Enforced</span>
+                </div>
+            </div>
+
+        </div>
+    </footer>
+
+
+    <!-- Back to Top Floating Button -->
+    <button id="back-to-top" class="fixed bottom-6 right-6 z-40 hidden p-3 rounded-xl bg-rust-600 text-white shadow-lg shadow-rust-600/30 hover:bg-rust-500 hover:-translate-y-1 transition-all focus:outline-none focus:ring-2 focus:ring-rust-500" aria-label="Back to Top">
+        <i class="fa-solid fa-arrow-up"></i>
+    </button>
+
+
+    <!-- ==========================================
+         JAVASCRIPT INTERACTIVITY LOGIC
+         ========================================== -->
+    <script>
+        // --- 1. Reading Progress Bar & Back to Top Controller ---
+        const progressBar = document.getElementById('reading-progress');
+        const backToTopBtn = document.getElementById('back-to-top');
+
+        window.addEventListener('scroll', () => {
+            const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / totalHeight) * 100;
+            if (progressBar) {
+                progressBar.style.width = `${progress}%`;
+            }
+
+            if (backToTopBtn) {
+                if (window.pageYOffset > 400) {
+                    backToTopBtn.classList.remove('hidden');
+                } else {
+                    backToTopBtn.classList.add('hidden');
+                }
+            }
+        });
+
+        if (backToTopBtn) {
+            backToTopBtn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        }
+
+
+        // --- 2. Responsive Mobile Hamburger Menu ---
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const hamburgerIcon = document.getElementById('hamburger-icon');
+        const mobileNavLinks = document.querySelectorAll('.mobile-nav-link');
+
+        if (mobileMenuBtn && mobileMenu) {
+            mobileMenuBtn.addEventListener('click', () => {
+                const isExpanded = mobileMenu.classList.toggle('hidden');
+                if (!isExpanded) {
+                    hamburgerIcon.classList.remove('fa-bars');
+                    hamburgerIcon.classList.add('fa-xmark');
+                } else {
+                    hamburgerIcon.classList.remove('fa-xmark');
+                    hamburgerIcon.classList.add('fa-bars');
+                }
+            });
+
+            mobileNavLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                    hamburgerIcon.classList.remove('fa-xmark');
+                    hamburgerIcon.classList.add('fa-bars');
+                });
+            });
+        }
+
+
+        // --- 3. Interactive Code Snippet Tabs & Copy Functionality ---
+        let currentTab = 'hello';
+
+        const codeSnippetsRaw = {
+            hello: `fn main() {\n    println!("Hello, World!");\n}`,
+            borrow: `fn main() {\n    let mut message = String::from("Hello");\n    \n    // Borrow immutably\n    let len = calculate_length(&message);\n    println!("Length of '{}' is {}", message, len);\n    \n    // Borrow mutably\n    append_world(&mut message);\n    println!("Updated: {}", message);\n}\n\nfn calculate_length(s: &String) -> usize {\n    s.len()\n}\n\nfn append_world(s: &mut String) {\n    s.push_str(", Rustaceans!");\n}`,
+            concurrency: `use std::thread;\nuse std::time::Duration;\n\nfn main() {\n    let handle = thread::spawn(|| {\n        for i in 1..=3 {\n            println!("Spawned worker task count: {}", i);\n            thread::sleep(Duration::from_millis(10));\n        }\n    });\n\n    println!("Main thread running concurrently...");\n    handle.join().unwrap();\n    println!("All threads executed safely with zero races!");\n}`
+        };
+
+        function switchCodeTab(tabKey) {
+            currentTab = tabKey;
+            
+            // Hide all code snippets
+            document.getElementById('code-snippet-hello').classList.add('hidden');
+            document.getElementById('code-snippet-borrow').classList.add('hidden');
+            document.getElementById('code-snippet-concurrency').classList.add('hidden');
+
+            // Reset tab styles
+            document.querySelectorAll('.code-tab-btn').forEach(btn => {
+                btn.className = 'code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-slate-400 hover:text-white hover:bg-tech-bg/50 border border-transparent transition-all';
+            });
+
+            // Show selected snippet and highlight button
+            const selectedSnippet = document.getElementById(`code-snippet-${tabKey}`);
+            const selectedTab = document.getElementById(`tab-${tabKey}`);
+
+            if (selectedSnippet) selectedSnippet.classList.remove('hidden');
+            if (selectedTab) selectedTab.className = 'code-tab-btn px-3 py-1.5 rounded-lg text-xs font-mono font-medium text-white bg-tech-bg border border-rust-500/40 transition-all';
+        }
+
+        function copyActiveCode() {
+            const codeToCopy = codeSnippetsRaw[currentTab] || codeSnippetsRaw.hello;
+            const copyBtn = document.getElementById('copy-code-btn');
+            const copyText = document.getElementById('copy-text');
+            const copyIcon = document.getElementById('copy-icon');
+
+            navigator.clipboard.writeText(codeToCopy).then(() => {
+                copyText.innerText = 'Copied!';
+                copyIcon.className = 'fa-solid fa-check text-emerald-400';
+                copyBtn.classList.add('bg-rust-600', 'text-white');
+
+                setTimeout(() => {
+                    copyText.innerText = 'Copy Code';
+                    copyIcon.className = 'fa-regular fa-copy';
+                    copyBtn.classList.remove('bg-rust-600', 'text-white');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        }
+
+
+        // --- 4. Interactive FAQ Accordion ---
+        const faqToggles = document.querySelectorAll('.faq-toggle');
+
+        faqToggles.forEach(toggle => {
+            toggle.addEventListener('click', () => {
+                const parent = toggle.closest('.faq-item');
+                const content = parent.querySelector('.faq-content');
+                const icon = parent.querySelector('.faq-icon');
+                const isOpen = !content.classList.contains('hidden');
+
+                // Close all items
+                document.querySelectorAll('.faq-content').forEach(item => item.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(ic => {
+                    ic.className = 'fa-solid fa-plus faq-icon transition-transform duration-200';
+                });
+
+                // Toggle current item
+                if (!isOpen) {
+                    content.classList.remove('hidden');
+                    icon.className = 'fa-solid fa-minus faq-icon transition-transform duration-200 text-rust-400';
+                }
+            });
+        });
+
+
+        // --- 5. Quick Search Modal & Navigation Jump ---
+        const searchOpenBtn = document.getElementById('search-open-btn');
+        const searchCloseBtn = document.getElementById('search-close-btn');
+        const searchModal = document.getElementById('search-modal');
+        const searchInput = document.getElementById('search-input');
+        const searchResults = document.getElementById('search-results');
+
+        const articleIndex = [
+            { title: 'Hero Section: Fast. Safe. Reliable.', href: '#hero', category: 'Overview' },
+            { title: 'About Rust: Origins, Creator & History', href: '#about', category: 'Introduction' },
+            { title: 'What is Rust? 5 Pillars of Architecture', href: '#what-is-rust', category: 'Core Concepts' },
+            { title: 'Why is Rust Popular? Memory Safety & Performance', href: '#why-popular', category: 'Features' },
+            { title: 'Rust Code Example: Hello World & Syntax', href: '#code-example', category: 'Code' },
+            { title: 'Ownership, Borrowing & Lifetimes Deep-Dive', href: '#ownership-borrowing', category: 'Memory Model' },
+            { title: 'Key Features: 8 Architectural Capabilities', href: '#features', category: 'Features' },
+            { title: 'Advantages vs Disadvantages Analysis', href: '#advantages-disadvantages', category: 'Evaluation' },
+            { title: '10 Real-World Applications of Rust', href: '#applications', category: 'Industry' },
+            { title: 'Rust vs C++ Comparison Table', href: '#comparisons', category: 'Benchmarks' },
+            { title: 'Rust vs Python Detailed Comparison', href: '#comparisons', category: 'Benchmarks' },
+            { title: '7 Rust Career Opportunities & Roles', href: '#career', category: 'Careers' },
+            { title: '10-Step Visual Learning Roadmap', href: '#roadmap', category: 'Curriculum' },
+            { title: 'Future of Rust Across Computing', href: '#future', category: 'Trajectory' },
+            { title: 'Frequently Asked Questions (FAQ)', href: '#faq', category: 'Knowledgebase' }
+        ];
+
+        function renderSearchResults(query = '') {
+            searchResults.innerHTML = '';
+            const filtered = articleIndex.filter(item => 
+                item.title.toLowerCase().includes(query.toLowerCase()) || 
+                item.category.toLowerCase().includes(query.toLowerCase())
+            );
+
+            if (filtered.length === 0) {
+                searchResults.innerHTML = `<div class="p-4 text-center text-slate-400 text-xs">No matching topics found for "${query}"</div>`;
+                return;
+            }
+
+            filtered.forEach(item => {
+                const link = document.createElement('a');
+                link.href = item.href;
+                link.className = 'flex items-center justify-between p-2.5 rounded-xl hover:bg-tech-bg text-slate-200 hover:text-rust-400 transition-colors block';
+                link.innerHTML = `
+                    <div class="flex items-center gap-2.5">
+                        <i class="fa-solid fa-file-code text-xs text-rust-500"></i>
+                        <span>${item.title}</span>
+                    </div>
+                    <span class="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-tech-cardAlt text-tech-muted border border-tech-border">${item.category}</span>
+                `;
+                link.addEventListener('click', () => {
+                    searchModal.classList.add('hidden');
+                });
+                searchResults.appendChild(link);
+            });
+        }
+
+        if (searchOpenBtn && searchModal) {
+            searchOpenBtn.addEventListener('click', () => {
+                searchModal.classList.remove('hidden');
+                searchInput.value = '';
+                renderSearchResults('');
+                setTimeout(() => searchInput.focus(), 100);
+            });
+
+            searchCloseBtn.addEventListener('click', () => {
+                searchModal.classList.add('hidden');
+            });
+
+            searchModal.addEventListener('click', (e) => {
+                if (e.target === searchModal) {
+                    searchModal.classList.add('hidden');
+                }
+            });
+
+            searchInput.addEventListener('input', (e) => {
+                renderSearchResults(e.target.value);
+            });
+
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && !searchModal.classList.contains('hidden')) {
+                    searchModal.classList.add('hidden');
+                }
+            });
+        }
+    </script>
+</body>
+</html>
