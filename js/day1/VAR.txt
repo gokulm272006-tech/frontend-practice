@@ -1,0 +1,70 @@
+VAR:
+
+var studentName 
+var studentAge 
+var studentCourse 
+var studentCity 
+var studentEmail 
+var studentPhone 
+var totalMarks 
+var averageMarks 
+var studentGrade 
+var isStudent 
+var productName 
+var productPrice 
+var productBrand 
+var productQuantity 
+var employeeName 
+var employeeAge 
+var employeeSalary
+var companyName 
+var officeLocation 
+var joiningYear 
+
+
+LET:
+
+let userName 
+let userAge
+let userCity 
+let userEmail 
+let userPassword 
+let currentCourse 
+let currentTopic 
+let examMarks 
+let assignmentMarks 
+let attendancePercentage
+let itemName 
+let itemPrice
+let itemQuantity 
+let totalAmount 
+let monthlySalary 
+let workingHours 
+let loginStatus 
+let accountBalance 
+let currentMonth 
+let currentDay 
+
+
+CONST:
+
+const collegeName 
+const countryName 
+const stateName 
+const cityName 
+const companyName 
+const companyLocation 
+const maximumMarks 
+const minimumMarks 
+const passingPercentage 
+const piValue 
+const birthYear 
+const currentYear 
+const websiteName 
+const websiteUrl 
+const courseName 
+const courseDuration 
+const taxPercentage 
+const discountPercentage 
+const maxLoginAttempts 
+const appVersion 
