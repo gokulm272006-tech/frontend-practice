@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>basic</title>
+</head>
+<body>
+    <script>
+
+        // factorial
+
+        let num=5;
+        let factorial=1;
+         
+        for(let i=1 ;i<=num ;i++){
+            factorial=factorial*i;
+            console.log("factorial:",factorial);
+            
+        }
+
+
+        // PRIMNUMBER
+
+        let numbers=[2, 3, 4, 5, 6, 7, 8, 9, 98, 12, 21, 32, 43, 55]
+         
+        for(let num of numbers){
+            let count = 0;
+
+            for(let i=1; i<=num; i++){
+                if(num%i==0){
+                    count++;
+                }
+            }
+            if(count==2){
+                console.log(num);
+                
+            }
+        }
+    </script>
+</body>
+</html>
