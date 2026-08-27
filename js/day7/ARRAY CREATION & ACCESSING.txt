@@ -1,0 +1,83 @@
+ARRAY CREATION & ACCESSING:
+
+
+
+ 1.fruits
+let fruits=["apple","mango","orange"];
+console.log(fruits[1]);
+
+ 2.collection of array
+let array=[12,"ram",434,231,"fullstack",90000];
+console.log(array);
+
+ 3.colors
+let colors = ["Red", "Green", "Blue"];
+console.log(colors[1]);
+
+ 4. Cars
+let cars = ["BMW", "Audi", "Toyota"];
+console.log(cars[2]);
+
+ 5. Students
+let students = ["Gokul", "Arun", "Kumar"];
+console.log(students[0]);
+
+ 6. Subjects
+let subjects = ["HTML", "CSS", "JavaScript"];
+console.log(subjects[2]);
+
+ 7. Countries
+let countries = ["India", "USA", "Japan"];
+console.log(countries[1]);
+
+ 8. Cities
+let cities = ["Chennai", "Madurai", "Trichy"];
+console.log(cities[0]);
+
+ 9. Programming Languages
+let languages = ["JavaScript", "Python", "Java"];
+console.log(languages[1]);
+
+ 10. Ages
+let ages = [18, 20, 22, 25];
+console.log(ages[3]);
+
+ 11. Marks
+let marks = [85, 90, 75, 95];
+console.log(marks[1]);
+
+ 12. Sports
+let sports = ["Cricket", "Football", "Tennis"];
+console.log(sports[2]);
+
+ 13. Animals
+let animals = ["Dog", "Cat", "Lion"];
+console.log(animals[0]);
+
+ 14. Mobile Brands
+let mobiles = ["Samsung", "Apple", "OnePlus"];
+console.log(mobiles[1]);
+
+ 15. Vegetables
+let vegetables = ["Carrot", "Potato", "Tomato"];
+console.log(vegetables[2]);
+
+ 16. Drinks
+let drinks = ["Tea", "Coffee", "Juice"];
+console.log(drinks[1]);
+
+ 17. Months
+let months = ["January", "February", "March"];
+console.log(months[0]);
+
+ 18. Days
+let days = ["Monday", "Tuesday", "Wednesday"];
+console.log(days[2]);
+
+ 19. Employees
+let employees = ["Ravi", "Karthik", "Vijay"];
+console.log(employees[1]);
+
+ 20. Technologies
+let technologies = ["React", "Node.js", "MongoDB"];
+console.log(technologies[2]);
