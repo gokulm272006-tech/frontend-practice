@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Salary Filter</title>
+</head>
+<body>
+   <script>
+    let highestSalary=40000;
+     let employee=[
+        {
+            name:"gopal",
+            salary:20000
+        },
+         {
+            name:"goku",
+            salary:50000
+        },
+         {
+            name:"sandy",
+            salary:70000
+        },
+         {
+            name:"tommy",
+            salary:80000
+        }
+     ];
+     for (let i = 0; i < employee.length; i++) {
+        if(employee[i].salary>=highestSalary){
+              console.log(employee[i].name);
+        }
+        
+     }
+   </script>
+</body>
+</html>
