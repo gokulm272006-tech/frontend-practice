@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+      
+var globalVar = "I am Global";
+let globalLet = "I am also Global";
+const globalConst = "I am also Global";
+
+console.log(globalVar);
+console.log(globalLet);
+console.log(globalConst);
+
+
+
+function testFunction() {
+    var functionVar = "Function Scope";
+    let functionLet = "Function Scope";
+    const functionConst = "Function Scope";
+
+    console.log(functionVar);
+    console.log(functionLet);
+    console.log(functionConst);
+}
+
+testFunction();
+
+
+
+{
+    var blockVar = "var is not Block Scoped";
+    let blockLet = "let is Block Scoped";
+    const blockConst = "const is Block Scoped";
+
+    console.log(blockVar);
+    console.log(blockLet);
+    console.log(blockConst);
+}
+
+
+console.log(blockVar);
+    </script>
+</body>
+</html>
