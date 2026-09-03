@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Callback Function</title>
+</head>
+<body>
+    <script>
+       let processNumber = (num, callback) => {
+            let result = num * 2;
+            callback(result);
+        };
+
+        let displayResult = (result) => {
+            console.log("The result is: " + result);
+        };
+
+        processNumber(5, displayResult);
+    </script>
+</body>
+</html>

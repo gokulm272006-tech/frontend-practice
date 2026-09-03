@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Methods Until concat()</title>
+</head>
+<body>
+    <script>
+      let fruits = ["Apple", "Mango", "Orange"];
+      let vegetables = ["Carrot", "Potato"];
+       
+      fruits.push("Banana");
+      console.log(fruits);
+      fruits.pop();
+      console.log(fruits);
+      fruits.unshift("Grapes")
+      console.log(fruits);
+      fruits.shift();
+      console.log(fruits);  
+      console.log(fruits.length);
+      console.log(vegetables.length);
+        let combinedArray = fruits.concat(vegetables);
+        console.log(combinedArray);
+    </script>
+</body>
+</html>
