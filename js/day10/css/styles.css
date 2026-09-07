@@ -1,0 +1,153 @@
+/* JavaScript Learning Showcase - Custom Styles */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #F8F7F2;
+  --bg-surface: #FFFFFF;
+  --text-primary: #172033;
+  --text-secondary: #667085;
+  --color-indigo: #4F46E5;
+  --color-violet: #7C3AED;
+  --color-teal: #0F766E;
+  --color-coral: #F97360;
+  --color-amber: #F59E0B;
+  --border-color: #E6E3DC;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+code, pre, .font-mono {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+/* Custom Soft Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F1EFEA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D5D1C7;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B8B2A6;
+}
+
+/* Glassmorphic Cards with Crisp Borders */
+.glass-card {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--border-color);
+  box-shadow: 0 4px 20px -2px rgba(23, 32, 51, 0.03), 0 2px 6px -1px rgba(23, 32, 51, 0.02);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+}
+
+.glass-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px -4px rgba(23, 32, 51, 0.07), 0 4px 10px -2px rgba(23, 32, 51, 0.04);
+  border-color: #D3CECA;
+}
+
+/* Subtle Accent Border Gradients for Featured Cards */
+.accent-border-teal:hover { border-color: rgba(15, 118, 110, 0.4); }
+.accent-border-violet:hover { border-color: rgba(124, 58, 237, 0.4); }
+.accent-border-coral:hover { border-color: rgba(249, 115, 96, 0.4); }
+.accent-border-indigo:hover { border-color: rgba(79, 70, 229, 0.4); }
+.accent-border-amber:hover { border-color: rgba(245, 158, 11, 0.4); }
+
+/* Code Editor Window Presentation */
+.code-window {
+  background: #151A26;
+  border: 1px solid #283042;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.15);
+}
+
+.code-window-header {
+  background: #10141E;
+  border-bottom: 1px solid #232B3C;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.code-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.code-dot-red { background: #FF5F56; }
+.code-dot-yellow { background: #FFBD2E; }
+.code-dot-green { background: #27C93F; }
+
+/* Syntax Highlighter Helper Colors in Light/Dark Code Blocks */
+.syn-kw { color: #F43F5E; font-weight: 600; }     /* let, const, if, for */
+.syn-fn { color: #38BDF8; font-weight: 500; }     /* console.log, reduce, function */
+.syn-str { color: #34D399; }                       /* "strings" */
+.syn-num { color: #FBBF24; }                       /* numbers */
+.syn-comm { color: #64748B; font-style: italic; } /* comments */
+.syn-op { color: #A78BFA; }                        /* ===, !==, +, => */
+.syn-prop { color: #E2E8F0; }                      /* properties */
+
+/* Line Numbers Styling */
+.code-line-numbers {
+  user-select: none;
+  color: #475569;
+  text-align: right;
+  padding-right: 16px;
+  border-right: 1px solid #2A3447;
+}
+
+/* Modal Animations */
+.modal-overlay {
+  transition: opacity 0.25s ease-out;
+}
+
+.modal-content {
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.25s ease-out;
+}
+
+/* Badge Pulse Animation */
+@keyframes softPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.15); }
+}
+
+.animate-pulse-subtle {
+  animation: softPulse 2.5s infinite ease-in-out;
+}
+
+/* Decorative Hero Mesh & Grid Lines */
+.hero-grid-pattern {
+  background-image: radial-gradient(rgba(23, 32, 51, 0.06) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Toast Notification */
+#toast-notification {
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#toast-notification.show {
+  transform: translateY(0);
+  opacity: 1;
+}
