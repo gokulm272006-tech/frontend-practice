@@ -1,26 +1,10 @@
-// let date=(name,oror)=>{
-//     console.log(name);
-//     oror();
-// }
+const titleInput = document.getElementById('title');
+const contentInput = document.querySelectorAll('.content');
+const changeTextButton = document.getElementById('btn');
 
-// let oror=()=>{
-//     console.log("callback function");
-// }
-
-// date("John", oror);
-
-let createCounter = () => {
-    let count = 0;
-
-    return () => {
-        count++;
-        console.log(count);
-    };
-};
-
-let counter = createCounter();
-
-counter();
-counter();
-counter();
-counter();
+changeTextButton.addEventListener('click', () => {
+    titleInput.textContent = 'New Task Title';
+    contentInput.forEach((p) => {
+        p.textContent = 'New Task Content';
+    });
+});
