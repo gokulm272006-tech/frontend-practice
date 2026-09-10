@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Smooth Card Toggle</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+    <!-- Card -->
+    <div class="w-80 bg-white rounded-2xl shadow-lg overflow-hidden">
+
+        <!-- Image -->
+        <img 
+            src="assets/img/images.jpg" 
+            alt="Laptop"
+            class="w-full h-48 object-cover"
+        >
+
+        <!-- Card Content -->
+        <div class="p-5">
+
+            <!-- Heading -->
+            <h1 class="text-2xl font-bold text-gray-800 mb-2 text-center">
+                Laptop
+            </h1>
+
+            <!-- Details -->
+            <div id="details"
+                class="opacity-0 max-h-0 overflow-hidden transition-all duration-500">
+
+                <p class="text-gray-600 mb-4">
+                    A high-performance laptop for gaming and productivity.
+                    It provides fast performance, excellent graphics,
+                    and a smooth user experience.
+                </p>
+
+            </div>
+
+            <!-- Button -->
+            <button
+                id="btn"
+                class="w-full bg-blue-600 text-white py-2 rounded-lg 
+                       hover:bg-blue-700 transition duration-300">
+                Show Details
+            </button>
+
+        </div>
+    </div>
+
+    <script src="assets/js/task3.js"></script>
+
+</body>
+</html>
