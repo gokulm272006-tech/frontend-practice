@@ -1,7 +1,11 @@
 const details = document.getElementById("details");
 const btn = document.getElementById("btn");
 
+let isOn = false;
+
 btn.addEventListener("click", () => {
+
+    isOn = !isOn;
 
     details.classList.toggle("opacity-0");
     details.classList.toggle("max-h-0");
@@ -9,10 +13,6 @@ btn.addEventListener("click", () => {
     details.classList.toggle("opacity-100");
     details.classList.toggle("max-h-40");
 
-    if (details.classList.contains("opacity-100")) {
-        btn.textContent = "Hide Details";
-    } else {
-        btn.textContent = "Show Details";
-    }
+    btn.textContent = isOn ? "Hide Details" : "Show Details";
 
 });

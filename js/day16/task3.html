@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .card {
+            width: 400px;
+            height: 400px;
+            border: 1px solid #ccc;
+            padding: 20px;
+            box-sizing: border-box;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #inputField {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        #addButton {
+            width: 30%;
+            padding: 10px 20px;
+            background-color: #f77c0a;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .hidden {
+            background-color: #190547;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div id="card" class="card">
+        <h2>Card Title</h2>
+        <p>This is a card description.</p>
+       <input type="text" id="inputField" placeholder="Enter text">
+       <button id="addButton">change</button>
+    </div>
+    
+    <script src="assets/js/task3.js"></script>
+</body>
+</html>
