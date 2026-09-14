@@ -1,0 +1,1490 @@
+<!DOCTYPE html>
+<html lang="en" class="dark scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FUTURE 2030 — IT in 2030, The Risk & The Alternative</title>
+    <!-- Meta tags for SEO & Open Graph -->
+    <meta name="description" content="An elite futuristic study on the IT industry in 2030, scenario planning for Chennai without IT, and alternative non-tech career pathways.">
+    <meta property="og:title" content="FUTURE 2030 — IT, Risk & Alternative Careers">
+    <meta property="og:description" content="Exploring AI evolution, urban industrial impact, and transferable human skills for 2030 and beyond.">
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Space Grotesk & Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        obsidian: '#0b0f19',
+                        obsidianDark: '#070a12',
+                        obsidianLight: '#1e293b',
+                        neonMint: '#00f5d4',
+                        neonCyan: '#06b6d4',
+                        vividPurple: '#8b5cf6',
+                        coralPink: '#f43f5e',
+                        brightAmber: '#f59e0b',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #f1f5f9;
+            font-family: 'Inter', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .font-display {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        /* Solid Flat Dark Cards */
+        .glass-panel {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .glass-panel-interactive {
+            background: rgba(30, 41, 59, 0.75);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.25s ease-in-out;
+        }
+
+        .glass-panel-interactive:hover {
+            border-color: #00f5d4;
+            transform: translateY(-4px);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0b0f19;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1e293b;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00f5d4;
+        }
+
+        /* Solid Cyber Grid Line Pattern */
+        .bg-grid-cyber {
+            background-size: 50px 50px;
+            background-image: 
+                linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+        }
+
+        /* Route View Animations */
+        .page-view {
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+        .page-view.hidden-view {
+            display: none !important;
+            opacity: 0;
+            transform: translateY(12px);
+        }
+        .page-view.active-view {
+            display: block !important;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Flat Solid Range Slider Styling */
+        input[type=range]::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background: #00f5d4;
+            cursor: pointer;
+            margin-top: -7px;
+        }
+        input[type=range]::-webkit-slider-runnable-track {
+            width: 100%;
+            height: 6px;
+            cursor: pointer;
+            background: #1e293b;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between relative bg-grid-cyber selection:bg-neonMint selection:text-black">
+
+    <!-- GLOBAL NAVBAR -->
+    <header class="sticky top-0 z-50 w-full glass-panel border-b border-white/10 px-4 sm:px-8 py-4 transition-all duration-300" id="mainHeader">
+        <div class="max-w-7xl mx-auto flex items-center justify-between">
+            <!-- Brand Logo -->
+            <a href="#home" onclick="switchRoute('home'); return false;" class="flex items-center space-x-3 group">
+                <div class="w-10 h-10 rounded-xl bg-neonMint p-0.5 flex items-center justify-center shadow-md group-hover:bg-neonCyan transition-all">
+                    <div class="w-full h-full bg-obsidian rounded-[10px] flex items-center justify-center">
+                        <i class="fa-solid fa-bolt text-neonMint text-lg group-hover:scale-110 transition-transform"></i>
+                    </div>
+                </div>
+                <div class="flex flex-col">
+                    <span class="font-display text-xl font-bold tracking-wider text-white">
+                        FUTURE<span class="text-neonMint font-extrabold">2030</span>
+                    </span>
+                    <span class="text-[10px] tracking-widest uppercase text-slate-400 font-semibold">Strategic Foresight Lab</span>
+                </div>
+            </a>
+
+            <!-- Desktop Navigation Links -->
+            <nav class="hidden md:flex items-center space-x-2 glass-panel rounded-full px-4 py-1.5 border border-white/10">
+                <button onclick="switchRoute('home')" id="nav-home" class="nav-link px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 text-black bg-neonMint">
+                    <i class="fa-solid fa-microchip mr-1.5"></i> Home (2030 IT)
+                </button>
+                <button onclick="switchRoute('chennai')" id="nav-chennai" class="nav-link px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 text-slate-300 hover:text-white hover:bg-white/10">
+                    <i class="fa-solid fa-city mr-1.5"></i> Chennai Scenario
+                </button>
+                <button onclick="switchRoute('careers')" id="nav-careers" class="nav-link px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all duration-200 text-slate-300 hover:text-white hover:bg-white/10">
+                    <i class="fa-solid fa-compass mr-1.5"></i> Life Beyond IT
+                </button>
+            </nav>
+
+            <!-- CTA & Mobile Toggle -->
+            <div class="flex items-center space-x-4">
+                <button onclick="switchRoute('careers')" class="hidden sm:inline-flex items-center space-x-2 text-xs font-bold uppercase tracking-wider text-black bg-neonMint hover:bg-neonCyan px-5 py-2.5 rounded-xl transition-all shadow-md transform hover:-translate-y-0.5">
+                    <span>Explore Pathways</span>
+                    <i class="fa-solid fa-arrow-right text-xs"></i>
+                </button>
+
+                <button id="mobileMenuBtn" onclick="toggleMobileMenu()" class="md:hidden p-2 text-slate-300 hover:text-neonMint focus:outline-none">
+                    <i class="fa-solid fa-bars text-xl" id="menuIcon"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Drawer -->
+        <div id="mobileDrawer" class="hidden md:hidden mt-4 pt-4 border-t border-white/10 flex flex-col space-y-2">
+            <button onclick="switchRoute('home'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl text-sm font-semibold text-black bg-neonMint">
+                <i class="fa-solid fa-microchip mr-3"></i>01. IT Field in 2030
+            </button>
+            <button onclick="switchRoute('chennai'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/10">
+                <i class="fa-solid fa-city mr-3 text-coralPink"></i>02. Chennai Without IT
+            </button>
+            <button onclick="switchRoute('careers'); toggleMobileMenu();" class="text-left px-4 py-3 rounded-xl text-sm font-semibold text-slate-200 hover:bg-white/10">
+                <i class="fa-solid fa-compass mr-3 text-brightAmber"></i>03. Life Beyond IT
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN ROUTER CONTAINER -->
+    <main class="flex-grow">
+
+        <!-- ========================================== -->
+        <!-- PAGE 1: IT IN 2030 (Home view) -->
+        <!-- ========================================== -->
+        <div id="view-home" class="page-view active-view">
+            <!-- Hero Section -->
+            <section class="relative pt-12 pb-20 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+                    <div class="lg:col-span-7 text-left space-y-6">
+                        <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-obsidianLight border border-neonMint/40 text-xs text-neonMint font-mono">
+                            <span class="w-2 h-2 rounded-full bg-neonMint"></span>
+                            <span>2030 STRATEGIC BRIEF // NEXT DECADE SPECTRUM</span>
+                        </div>
+
+                        <h1 class="font-display text-4xl sm:text-6xl lg:text-7xl font-extrabold tracking-tight leading-[1.1] text-white">
+                            What Will the IT Industry Look Like in <span class="text-neonMint">2030?</span>
+                        </h1>
+
+                        <p class="text-slate-300 text-base sm:text-lg max-w-2xl leading-relaxed font-normal">
+                            Artificial intelligence, quantum fabrics, cybersecurity meshes, and autonomous systems are turning code generation into system orchestration. Discover how tech roles are evolving and what it takes to thrive.
+                        </p>
+
+                        <div class="pt-4 flex flex-col sm:flex-row items-center gap-4">
+                            <button onclick="scrollToSection('shift-section')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm text-black bg-neonMint hover:bg-neonCyan transition-all flex items-center justify-center space-x-3">
+                                <span>Explore the 2030 Shift</span>
+                                <i class="fa-solid fa-chevron-down text-xs"></i>
+                            </button>
+                            <button onclick="switchRoute('careers')" class="w-full sm:w-auto px-8 py-4 rounded-xl font-bold text-sm text-slate-200 glass-panel hover:border-coralPink hover:text-white transition-all border border-white/10 flex items-center justify-center space-x-3">
+                                <i class="fa-solid fa-lightbulb text-brightAmber"></i>
+                                <span>See Alternative Careers</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Interactive Visual Canvas Card -->
+                    <div class="lg:col-span-5 relative">
+                        <div class="glass-panel p-4 rounded-3xl border border-neonMint/30 shadow-xl relative overflow-hidden group">
+                            <div class="flex items-center justify-between pb-3 px-2 border-b border-white/10 text-xs font-mono text-slate-300">
+                                <span class="text-neonMint"><i class="fa-solid fa-network-wired mr-2"></i>2030_NEURAL_MESH_CANVAS</span>
+                                <span class="text-neonMint font-bold">60 FPS ACTIVE</span>
+                            </div>
+                            <div class="w-full h-80 relative mt-2 rounded-2xl overflow-hidden bg-obsidianDark">
+                                <canvas id="heroNodeCanvas" class="w-full h-full block"></canvas>
+                            </div>
+                            <div class="mt-3 text-center text-[11px] font-mono text-slate-400">
+                                Move cursor over nodes to interact with 2030 Neural Mesh
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION — THE 2030 SHIFT -->
+            <section id="shift-section" class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16 space-y-4">
+                    <h2 class="text-xs font-mono uppercase tracking-widest text-neonMint font-bold">Core Paradigm Transformation</h2>
+                    <h3 class="font-display text-3xl sm:text-5xl font-bold text-white">Six Pillars of the 2030 Tech Landscape</h3>
+                    <p class="text-slate-400 text-sm sm:text-base">Structural shifts altering how technology is built, deployed, and governed globally.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Pillar 1 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-neonMint">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-neonMint">01</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonMint/40 flex items-center justify-center text-neonMint text-xl">
+                                <i class="fa-solid fa-brain"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Artificial Intelligence Engine</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">AI transitions from an auxiliary tool to the core operational backbone, writing boilerplate logic and managing autonomous decision feedback loops.</p>
+                    </div>
+
+                    <!-- Pillar 2 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-vividPurple">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-vividPurple">02</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-vividPurple/40 flex items-center justify-center text-vividPurple text-xl">
+                                <i class="fa-solid fa-robot"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Hyper-Automation Systems</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Repetitive unit testing, infrastructure deployment, code refactoring, and customer ticketing are 100% autonomously orchestrated.</p>
+                    </div>
+
+                    <!-- Pillar 3 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-neonCyan">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-neonCyan">03</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonCyan/40 flex items-center justify-center text-neonCyan text-xl">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Serverless Quantum Clouds</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Global compute grids dynamically allocate workloads between classical clusters and quantum processing units in real-time.</p>
+                    </div>
+
+                    <!-- Pillar 4 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-coralPink">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-coralPink">04</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-coralPink/40 flex items-center justify-center text-coralPink text-xl">
+                                <i class="fa-solid fa-shield-halved"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Autonomous Cyber Mesh</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Self-healing security defenses protect expanded digital attack vectors against real-time AI-generated zero-day exploits.</p>
+                    </div>
+
+                    <!-- Pillar 5 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-brightAmber">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-brightAmber">05</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-brightAmber/40 flex items-center justify-center text-brightAmber text-xl">
+                                <i class="fa-solid fa-chart-pie"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Predictive Data Fabric</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Real-time data feeds move directly into automated action triggers, removing legacy manual reporting and dashboard latency.</p>
+                    </div>
+
+                    <!-- Pillar 6 -->
+                    <div class="glass-panel-interactive p-8 rounded-2xl relative group border-t-2 border-t-neonMint">
+                        <div class="flex items-center justify-between mb-6">
+                            <span class="font-mono text-3xl font-extrabold text-neonMint">06</span>
+                            <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonMint/40 flex items-center justify-center text-neonMint text-xl">
+                                <i class="fa-solid fa-people-arrows"></i>
+                            </div>
+                        </div>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">Human + AI Synergy</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Success hinges on human experts orchestrating swarms of intelligent AI agents rather than writing manual syntax.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SECTION — SEARCHABLE/FILTERABLE JOBS OF 2030 -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="flex flex-col lg:flex-row lg:items-end justify-between mb-10 gap-6">
+                    <div>
+                        <span class="text-xs font-mono uppercase tracking-widest text-neonMint font-bold">Emerging High-Demand Roles</span>
+                        <h3 class="font-display text-3xl sm:text-5xl font-bold mt-2 text-white">Specialized Tech Roles of 2030</h3>
+                    </div>
+
+                    <!-- Search Input & Category Filter Tabs -->
+                    <div class="flex flex-col sm:flex-row gap-3">
+                        <div class="relative">
+                            <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-slate-400 text-xs"></i>
+                            <input type="text" id="jobSearchInput" oninput="handleJobSearch()" placeholder="Search 2030 roles..." class="w-full sm:w-48 pl-9 pr-4 py-2 bg-obsidianLight border border-white/15 rounded-xl text-xs text-white placeholder-slate-400 focus:outline-none focus:border-neonMint">
+                        </div>
+                        <div class="flex flex-wrap gap-1.5 glass-panel p-1.5 rounded-xl border border-white/10">
+                            <button onclick="filter2030Jobs('all', this)" class="job-filter-btn text-xs font-semibold px-3 py-1.5 rounded-lg bg-neonMint text-black">All Roles</button>
+                            <button onclick="filter2030Jobs('ai', this)" class="job-filter-btn text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-300 hover:text-white">AI & ML</button>
+                            <button onclick="filter2030Jobs('infra', this)" class="job-filter-btn text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-300 hover:text-white">Infra & Cyber</button>
+                            <button onclick="filter2030Jobs('specialized', this)" class="job-filter-btn text-xs font-semibold px-3 py-1.5 rounded-lg text-slate-300 hover:text-white">Specialized</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="jobs2030Grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </section>
+
+            <!-- SECTION — THE BIG QUESTION -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-white/15 relative overflow-hidden shadow-xl">
+                    <div class="max-w-3xl mb-12 space-y-4">
+                        <span class="px-3 py-1 rounded-full bg-obsidianLight border border-coralPink/50 text-coralPink text-xs font-mono font-semibold">DISRUPTION ANALYSIS</span>
+                        <h3 class="font-display text-3xl sm:text-5xl font-bold text-white">Will AI Replace IT Jobs?</h3>
+                        <p class="text-slate-300 text-base leading-relaxed">
+                            Rather than total job destruction, technology shifts skill value. Standard code synthesis becomes automated, making high-level architecture, business domain logic, and ethical reasoning far more vital.
+                        </p>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-coralPink">
+                            <h4 class="font-display text-lg font-bold text-coralPink mb-3 flex items-center">
+                                <i class="fa-solid fa-arrow-trend-down mr-2"></i> Tasks Being Automated
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-coralPink mt-1.5 mr-2"></i>Manual software QA & unit testing</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-coralPink mt-1.5 mr-2"></i>Boilerplate CRUD code development</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-coralPink mt-1.5 mr-2"></i>First-line IT desk ticketing</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-coralPink mt-1.5 mr-2"></i>Basic database queries & entry</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-neonMint">
+                            <h4 class="font-display text-lg font-bold text-neonMint mb-3 flex items-center">
+                                <i class="fa-solid fa-arrow-trend-up mr-2"></i> High Growth Roles
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-neonMint mt-1.5 mr-2"></i>AI Ethics & Algorithmic Auditors</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-neonMint mt-1.5 mr-2"></i>Multi-Agent Orchestration Leads</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-neonMint mt-1.5 mr-2"></i>Quantum Cloud Security Architects</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-neonMint mt-1.5 mr-2"></i>Human-AI Interaction Engineers</li>
+                            </ul>
+                        </div>
+
+                        <div class="glass-panel p-6 rounded-2xl border-l-4 border-l-brightAmber">
+                            <h4 class="font-display text-lg font-bold text-brightAmber mb-3 flex items-center">
+                                <i class="fa-solid fa-key mr-2"></i> Universal Capabilities
+                            </h4>
+                            <ul class="space-y-2 text-xs text-slate-300">
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-brightAmber mt-1.5 mr-2"></i>AI Literacy & Prompt Architecture</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-brightAmber mt-1.5 mr-2"></i>First-Principles Problem Solving</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-brightAmber mt-1.5 mr-2"></i>Domain Expertise (Finance, Health)</li>
+                                <li class="flex items-start"><i class="fa-solid fa-circle text-[6px] text-brightAmber mt-1.5 mr-2"></i>Strategic Stakeholder Leadership</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FUTURE TIMELINE -->
+            <section class="py-20 px-4 sm:px-8 max-w-5xl mx-auto">
+                <div class="text-center mb-16">
+                    <span class="text-xs font-mono uppercase tracking-widest text-neonMint font-bold">Roadmap to 2030</span>
+                    <h3 class="font-display text-3xl sm:text-5xl font-bold mt-2 text-white">The Evolution Timeline</h3>
+                </div>
+
+                <div class="relative border-l-2 border-neonMint/40 ml-4 sm:ml-32 space-y-12">
+                    <!-- 2026 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neonMint group-hover:scale-125 transition-transform"></div>
+                        <span class="hidden sm:block absolute -left-28 top-1 font-mono text-sm font-bold text-neonMint">2026</span>
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-neonMint/50 transition-colors">
+                            <span class="sm:hidden font-mono text-xs text-neonMint font-bold block mb-1">YEAR 2026</span>
+                            <h4 class="font-display text-lg font-bold text-white">AI-Assisted Development Ubiquity</h4>
+                            <p class="text-sm text-slate-300 mt-2">Generative tools assist over 80% of professional developers in daily coding, unit testing, and documentation tasks.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2027 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-neonCyan group-hover:scale-125 transition-transform"></div>
+                        <span class="hidden sm:block absolute -left-28 top-1 font-mono text-sm font-bold text-neonCyan">2027</span>
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-neonCyan/50 transition-colors">
+                            <span class="sm:hidden font-mono text-xs text-neonCyan font-bold block mb-1">YEAR 2027</span>
+                            <h4 class="font-display text-lg font-bold text-white">Autonomous Process Expansion</h4>
+                            <p class="text-sm text-slate-300 mt-2">Enterprise workflow engines execute complex business actions autonomously, reducing traditional software ticket backlogs.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2028 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-vividPurple group-hover:scale-125 transition-transform"></div>
+                        <span class="hidden sm:block absolute -left-28 top-1 font-mono text-sm font-bold text-vividPurple">2028</span>
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-vividPurple/50 transition-colors">
+                            <span class="sm:hidden font-mono text-xs text-vividPurple font-bold block mb-1">YEAR 2028</span>
+                            <h4 class="font-display text-lg font-bold text-white">Deep Enterprise Agent Integration</h4>
+                            <p class="text-sm text-slate-300 mt-2">Traditional monolith applications transition into decentralized micro-agent swarms managed by AI Architects.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2029 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-coralPink group-hover:scale-125 transition-transform"></div>
+                        <span class="hidden sm:block absolute -left-28 top-1 font-mono text-sm font-bold text-coralPink">2029</span>
+                        <div class="glass-panel p-6 rounded-2xl border border-white/10 hover:border-coralPink/50 transition-colors">
+                            <span class="sm:hidden font-mono text-xs text-coralPink font-bold block mb-1">YEAR 2029</span>
+                            <h4 class="font-display text-lg font-bold text-white">Normalized Human + AI Synergy</h4>
+                            <p class="text-sm text-slate-300 mt-2">Corporate metrics shift from headcount to agent ratio efficiency; multi-disciplinary teams replace tech-only silos.</p>
+                        </div>
+                    </div>
+
+                    <!-- 2030 -->
+                    <div class="relative pl-8 group">
+                        <div class="absolute -left-[9px] top-1.5 w-4 h-4 rounded-full bg-brightAmber group-hover:scale-125 transition-transform"></div>
+                        <span class="hidden sm:block absolute -left-28 top-1 font-mono text-sm font-bold text-brightAmber">2030</span>
+                        <div class="glass-panel p-6 rounded-2xl border border-brightAmber/50 bg-obsidianLight">
+                            <span class="sm:hidden font-mono text-xs text-brightAmber font-bold block mb-1">YEAR 2030</span>
+                            <h4 class="font-display text-lg font-bold text-brightAmber">The Problem-Solver Era</h4>
+                            <p class="text-sm text-slate-200 mt-2">Technology careers focus exclusively on complex real-world problem solving, ethical design, and systemic architecture.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL SECTION PAGE 1 -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto text-center">
+                <div class="glass-panel p-10 sm:p-16 rounded-3xl border border-neonMint/40 relative overflow-hidden shadow-xl">
+                    <h3 class="font-display text-3xl sm:text-5xl font-extrabold text-white max-w-4xl mx-auto leading-tight">
+                        “The future of IT is not simply about writing code. It is about understanding technology, solving problems, and creating human value.”
+                    </h3>
+                    <div class="mt-8">
+                        <button onclick="switchRoute('chennai')" class="px-8 py-4 rounded-xl font-bold text-sm text-black bg-neonMint hover:bg-neonCyan transition-all inline-flex items-center space-x-3">
+                            <span>What If Chennai Had No IT Industry?</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PAGE 2: CHENNAI WITHOUT IT (Chennai view) -->
+        <!-- ========================================== -->
+        <div id="view-chennai" class="page-view hidden-view">
+            <!-- Hero Section -->
+            <section class="relative pt-12 pb-16 px-4 sm:px-8 max-w-7xl mx-auto text-center">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-obsidianLight border border-coralPink/40 text-xs text-coralPink font-mono mb-6">
+                    <i class="fa-solid fa-city text-coralPink"></i>
+                    <span>URBAN ECONOMIC SIMULATION STUDY</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight text-white">
+                    What If Chennai Had <span class="text-coralPink">No IT Industry?</span>
+                </h1>
+
+                <p class="mt-6 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
+                    Imagine Chennai without Tidel Park, OMR technology corridors, tech campuses, and software professionals. How would the city function?
+                </p>
+            </section>
+
+            <!-- SECTION — CHENNAI TODAY STATISTICS -->
+            <section class="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center mb-8">
+                    <span class="text-xs font-mono uppercase tracking-widest text-slate-400">Present Landscape (Baseline Metrics)</span>
+                </div>
+                <div class="grid grid-cols-2 lg:grid-cols-5 gap-4">
+                    <div class="glass-panel p-6 rounded-2xl text-center border border-neonMint/30">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">IT COMPANIES</span>
+                        <div class="font-display text-3xl font-bold text-neonMint counter-val" data-target="2500">2,500+</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Active tech entities</span>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl text-center border border-neonCyan/30">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">TECH WORKFORCE</span>
+                        <div class="font-display text-3xl font-bold text-neonCyan counter-val" data-target="600000">600,000+</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Direct professionals</span>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl text-center border border-vividPurple/30">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">MAJOR IT PARKS</span>
+                        <div class="font-display text-3xl font-bold text-vividPurple counter-val" data-target="35">35+</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Tech hubs & SEZs</span>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl text-center border border-coralPink/30">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">STARTUPS</span>
+                        <div class="font-display text-3xl font-bold text-coralPink counter-val" data-target="3000">3,000+</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Tech ventures</span>
+                    </div>
+
+                    <div class="glass-panel p-6 rounded-2xl text-center border border-brightAmber/30 col-span-2 lg:col-span-1">
+                        <span class="text-xs text-slate-400 font-mono block mb-1">ECONOMIC IMPACT</span>
+                        <div class="font-display text-3xl font-bold text-brightAmber">TRANSFORMATIVE</div>
+                        <span class="text-[10px] text-slate-400 mt-1 block">Core growth driver</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- OMR CORRIDOR VISUALIZATION -->
+            <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 relative overflow-hidden shadow-xl">
+                    <div class="max-w-2xl mb-10">
+                        <span class="text-xs font-mono uppercase text-neonMint font-bold">The Technology Expressway Ecosystem</span>
+                        <h3 class="font-display text-3xl font-bold mt-2 text-white">OMR IT Corridor Visualizer</h3>
+                        <p class="text-slate-300 text-sm mt-2">From Taramani to Siruseri, millions of daily economic interactions are tied directly to the technology sector.</p>
+                    </div>
+
+                    <!-- Corridor Map Diagram -->
+                    <div class="relative py-8">
+                        <div class="absolute top-1/2 left-0 right-0 h-1 bg-neonCyan -translate-y-1/2 hidden md:block opacity-40"></div>
+                        <div class="grid grid-cols-1 md:grid-cols-4 gap-6 relative z-10">
+                            <!-- Node 1 -->
+                            <div class="glass-panel p-5 rounded-2xl border border-neonMint/40 text-center hover:bg-white/5 transition-all group">
+                                <div class="w-10 h-10 rounded-full bg-neonMint text-black font-bold flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">1</div>
+                                <h4 class="font-display font-bold text-white">Taramani</h4>
+                                <p class="text-xs text-slate-300 mt-1">Tidel Park genesis hub, research institutions, early software anchors.</p>
+                            </div>
+                            <!-- Node 2 -->
+                            <div class="glass-panel p-5 rounded-2xl border border-neonCyan/40 text-center hover:bg-white/5 transition-all group">
+                                <div class="w-10 h-10 rounded-full bg-neonCyan text-black font-bold flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">2</div>
+                                <h4 class="font-display font-bold text-white">Perungudi / Kandanchavadi</h4>
+                                <p class="text-xs text-slate-300 mt-1">High-density food courts, residential apartments, startup offices.</p>
+                            </div>
+                            <!-- Node 3 -->
+                            <div class="glass-panel p-5 rounded-2xl border border-vividPurple/40 text-center hover:bg-white/5 transition-all group">
+                                <div class="w-10 h-10 rounded-full bg-vividPurple text-white font-bold flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">3</div>
+                                <h4 class="font-display font-bold text-white">Sholinganallur</h4>
+                                <p class="text-xs text-slate-300 mt-1">Major enterprise campuses, metro transit hubs, retail corridors.</p>
+                            </div>
+                            <!-- Node 4 -->
+                            <div class="glass-panel p-5 rounded-2xl border border-coralPink/40 text-center hover:bg-white/5 transition-all group">
+                                <div class="w-10 h-10 rounded-full bg-coralPink text-white font-bold flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">4</div>
+                                <h4 class="font-display font-bold text-white">Siruseri</h4>
+                                <p class="text-xs text-slate-300 mt-1">SIPCOT IT Park, mega campuses, surrounding township developments.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- DIGITAL VS REAL WORLD IMPACT SLIDER -->
+            <section class="py-16 px-4 sm:px-8 max-w-5xl mx-auto">
+                <div class="glass-panel p-8 rounded-3xl border border-brightAmber/40 shadow-xl relative">
+                    <div class="text-center max-w-2xl mx-auto mb-6">
+                        <span class="text-xs font-mono uppercase text-brightAmber font-bold">Interactive Scenario Simulator</span>
+                        <h3 class="font-display text-2xl sm:text-3xl font-bold mt-1 text-white">Digital Focus vs. Physical Infrastructure</h3>
+                        <p class="text-slate-300 text-xs sm:text-sm mt-1">Slide to see how Chennai's economic weight shifts between pure tech and real-world industrial sectors.</p>
+                    </div>
+
+                    <div class="space-y-6">
+                        <div class="flex justify-between items-center text-xs font-mono font-bold">
+                            <span class="text-neonCyan"><i class="fa-solid fa-code mr-1"></i> HIGH TECH DOMINANCE (80% IT)</span>
+                            <span id="sliderValueText" class="text-brightAmber text-base">50% / 50% BALANCED</span>
+                            <span class="text-coralPink"><i class="fa-solid fa-industry mr-1"></i> PHYSICAL INDUSTRY FOCUS (80% Mfg)</span>
+                        </div>
+
+                        <input type="range" id="impactSlider" min="0" max="100" value="50" oninput="updateImpactSlider(this.value)">
+
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                            <div id="techImpactBox" class="glass-panel p-4 rounded-xl border border-neonCyan/30 transition-all">
+                                <h4 class="font-display text-sm font-bold text-neonCyan mb-1"><i class="fa-solid fa-laptop-code mr-2"></i>Tech & Software Footprint</h4>
+                                <p id="techImpactDesc" class="text-xs text-slate-300">Software exports drive real estate expansion on OMR, white-collar consumption, and venture capital inflow.</p>
+                            </div>
+                            <div id="physImpactBox" class="glass-panel p-4 rounded-xl border border-coralPink/30 transition-all">
+                                <h4 class="font-display text-sm font-bold text-coralPink mb-1"><i class="fa-solid fa-gears mr-2"></i>Physical & Core Industry Footprint</h4>
+                                <p id="physImpactDesc" class="text-xs text-slate-300">Automotive hubs in Sriperumbudur, medical tourism, and sea trade drive sustained industrial GDP.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- WHAT WOULD CHANGE CARDS -->
+            <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center max-w-2xl mx-auto mb-12">
+                    <h3 class="font-display text-3xl sm:text-4xl font-bold text-white">What Would Change Without IT?</h3>
+                    <p class="text-slate-400 text-sm mt-2">Simulating multi-sectorial impacts across Chennai's socio-economic fabric.</p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-coralPink">
+                        <i class="fa-solid fa-users-slash text-2xl text-coralPink mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Employment Shifts</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Engineers would pivot into non-tech manufacturing, civil engineering projects, public administration, and specialized technical trades.</p>
+                    </div>
+
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-brightAmber">
+                        <i class="fa-solid fa-building-circle-xmark text-2xl text-brightAmber mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Real Estate Corrections</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Rental demand along OMR and Velachery would recalibrate towards affordable housing, healthcare facilities, and research centers.</p>
+                    </div>
+
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonCyan">
+                        <i class="fa-solid fa-bus text-2xl text-neonCyan mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Traffic Re-Distribution</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Peak traffic congestion on the IT corridor would balance evenly across industrial belts like Sriperumbudur, Guindy, and Ennore.</p>
+                    </div>
+
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-vividPurple">
+                        <i class="fa-solid fa-utensils text-2xl text-vividPurple mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Local Service Ecosystems</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Restaurants, cafeterias, cab fleets, and local retail serving tech parks would adapt by shifting service offerings to local residents.</p>
+                    </div>
+
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonMint">
+                        <i class="fa-solid fa-graduation-cap text-2xl text-neonMint mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Educational Pivot</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Universities would broaden engineering curricula beyond Computer Science, boosting Mechanical, Electronics, Chemical, and Biotech programs.</p>
+                    </div>
+
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-brightAmber">
+                        <i class="fa-solid fa-chart-line text-2xl text-brightAmber mb-4"></i>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Startup Diversification</h4>
+                        <p class="text-sm text-slate-300 leading-relaxed">Entrepreneurs would focus on solving physical challenges: deep-tech hardware, clean energy grids, agricultural logistics, and medical tech.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- RIPPLE EFFECT DIAGRAM -->
+            <section class="py-16 px-4 sm:px-8 max-w-5xl mx-auto">
+                <div class="glass-panel p-8 sm:p-12 rounded-3xl border border-white/10 text-center shadow-xl">
+                    <span class="text-xs font-mono uppercase tracking-widest text-coralPink font-bold">Systemic Interconnectedness</span>
+                    <h3 class="font-display text-3xl font-bold mt-2 mb-8 text-white">Ripple Effect Visualizer</h3>
+
+                    <div class="flex flex-wrap items-center justify-center gap-3 py-6" id="rippleContainer">
+                        <div class="px-5 py-3 rounded-xl bg-neonMint text-black font-bold text-sm shadow-md">IT Sector Engine</div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 hidden sm:block"></i>
+                        <div class="px-4 py-2.5 rounded-xl glass-panel text-xs text-slate-200 border border-neonCyan/30">Direct Tech Jobs</div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 hidden sm:block"></i>
+                        <div class="px-4 py-2.5 rounded-xl glass-panel text-xs text-slate-200 border border-vividPurple/30">Housing & Real Estate</div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 hidden sm:block"></i>
+                        <div class="px-4 py-2.5 rounded-xl glass-panel text-xs text-slate-200 border border-brightAmber/30">Transport & Cabs</div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 hidden sm:block"></i>
+                        <div class="px-4 py-2.5 rounded-xl glass-panel text-xs text-slate-200 border border-coralPink/30">Retail & Food</div>
+                        <i class="fa-solid fa-arrow-right text-slate-500 hidden sm:block"></i>
+                        <div class="px-5 py-3 rounded-xl bg-vividPurple text-white font-bold text-sm shadow-md">Total Urban Economy</div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- SCENARIO COMPARISON TABLE -->
+            <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center mb-10">
+                    <h3 class="font-display text-3xl font-bold text-white">Scenario Comparison Matrix</h3>
+                </div>
+
+                <div class="glass-panel rounded-2xl overflow-hidden border border-white/10 shadow-xl">
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left border-collapse">
+                            <thead>
+                                <tr class="bg-obsidianLight border-b border-white/10 text-xs font-mono uppercase text-slate-300">
+                                    <th class="p-4">Economic Sector</th>
+                                    <th class="p-4 text-neonMint font-bold">Chennai With IT (Current)</th>
+                                    <th class="p-4 text-coralPink font-bold">Chennai Without IT (Hypothetical)</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-white/5 text-sm text-slate-300">
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="p-4 font-semibold text-white">Employment Focus</td>
+                                    <td class="p-4">High concentration in Software & Tech Services</td>
+                                    <td class="p-4">Distributed across Manufacturing, Healthcare & Trades</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="p-4 font-semibold text-white">Urban Growth Corridor</td>
+                                    <td class="p-4">Concentrated development along OMR & GST road</td>
+                                    <td class="p-4">Multi-nodal growth towards Oragadam, Thiruvallur & Ennore</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="p-4 font-semibold text-white">Service Ecosystem</td>
+                                    <td class="p-4">Optimized for tech desk workers and corporate campuses</td>
+                                    <td class="p-4">Diversified consumer, industrial, and maritime services</td>
+                                </tr>
+                                <tr class="hover:bg-white/5 transition-colors">
+                                    <td class="p-4 font-semibold text-white">Education System</td>
+                                    <td class="p-4">Heavily slanted toward CS/IT degree enrollments</td>
+                                    <td class="p-4">Balanced across core engineering, sciences, and vocational trades</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </section>
+
+            <!-- CHENNAI DIVERSIFIED ECONOMY -->
+            <section class="py-16 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-12">
+                    <h3 class="font-display text-3xl sm:text-4xl font-bold text-white">Would Chennai Stop Growing?</h3>
+                    <p class="text-neonMint font-mono text-sm mt-2 font-bold uppercase tracking-wider">ANSWER: NO. CHENNAI IS A DIVERSIFIED INDUSTRIAL POWERHOUSE.</p>
+                </div>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="glass-panel p-5 rounded-2xl border border-neonMint/30 text-center hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-car text-neonMint text-3xl mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Automotive Hub</h4>
+                        <p class="text-[11px] text-slate-300 mt-1">"Detroit of Asia" with major global carmakers.</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border border-vividPurple/30 text-center hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-user-doctor text-vividPurple text-3xl mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Healthcare Capital</h4>
+                        <p class="text-[11px] text-slate-300 mt-1">Premier medical tourism destination in South Asia.</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border border-neonCyan/30 text-center hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-anchor text-neonCyan text-3xl mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Ports & Maritime</h4>
+                        <p class="text-[11px] text-slate-300 mt-1">Major trade gateway via Chennai & Ennore ports.</p>
+                    </div>
+                    <div class="glass-panel p-5 rounded-2xl border border-coralPink/30 text-center hover:scale-105 transition-transform">
+                        <i class="fa-solid fa-industry text-coralPink text-3xl mb-2"></i>
+                        <h4 class="font-bold text-white text-sm">Hardware Mfg</h4>
+                        <p class="text-[11px] text-slate-300 mt-1">Electronics manufacturing clusters across Sriperumbudur.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL SECTION PAGE 2 -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto text-center">
+                <div class="glass-panel p-10 sm:p-16 rounded-3xl border border-vividPurple/40 relative overflow-hidden shadow-xl">
+                    <h3 class="font-display text-3xl sm:text-5xl font-extrabold text-white max-w-4xl mx-auto leading-tight">
+                        “If one industry shifts, a resilient city adapts, industries evolve, and new pathways emerge.”
+                    </h3>
+                    <div class="mt-8">
+                        <button onclick="switchRoute('careers')" class="px-8 py-4 rounded-xl font-bold text-sm text-black bg-coralPink hover:bg-brightAmber transition-all inline-flex items-center space-x-3">
+                            <span>What Careers Could We Pursue Beyond IT?</span>
+                            <i class="fa-solid fa-arrow-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+
+        <!-- ========================================== -->
+        <!-- PAGE 3: LIFE BEYOND IT (Careers view) -->
+        <!-- ========================================== -->
+        <div id="view-careers" class="page-view hidden-view">
+            <!-- Hero Section -->
+            <section class="relative pt-12 pb-16 px-4 sm:px-8 max-w-7xl mx-auto text-center">
+                <div class="inline-flex items-center space-x-2 px-3.5 py-1.5 rounded-full bg-obsidianLight border border-neonMint/40 text-xs text-neonMint font-mono mb-6">
+                    <i class="fa-solid fa-compass text-neonMint"></i>
+                    <span>ALTERNATIVE CAREER ARCHITECTURE</span>
+                </div>
+
+                <h1 class="font-display text-4xl sm:text-6xl font-extrabold tracking-tight max-w-4xl mx-auto leading-tight text-white">
+                    If IT Disappeared Tomorrow, <span class="text-neonMint">What Would We Do?</span>
+                </h1>
+
+                <p class="mt-6 text-slate-300 text-base sm:text-lg max-w-2xl mx-auto leading-relaxed font-normal">
+                    Technology is only one path among hundreds. Physical engineering, healthcare, trade mastery, creative direction, and essential human services drive human civilization.
+                </p>
+            </section>
+
+            <!-- CAREER ALTERNATIVES CATEGORIES -->
+            <section class="py-12 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row md:items-end justify-between mb-8 gap-4">
+                    <div>
+                        <span class="text-xs font-mono uppercase text-neonMint font-bold">Non-Tech Ecosystems</span>
+                        <h3 class="font-display text-3xl font-bold mt-1 text-white">High-Value Career Domains</h3>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" id="careersContainer">
+                    <!-- Dynamic rendering via JS -->
+                </div>
+            </section>
+
+            <!-- SKILLS THAT SURVIVE EVERY INDUSTRY -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto">
+                <div class="text-center max-w-3xl mx-auto mb-16">
+                    <span class="px-3 py-1 rounded-full bg-obsidianLight border border-neonCyan/40 text-neonCyan text-xs font-mono font-bold">TIMELESS HUMAN ASSETS</span>
+                    <h3 class="font-display text-3xl sm:text-5xl font-bold mt-3 text-white">Skills That Survive Every Industry Shift</h3>
+                    <p class="text-slate-300 text-sm mt-2">Jobs automate and industries adapt. Transferable human capabilities remain permanently valuable.</p>
+                </div>
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+                    <!-- Skill 1 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonCyan">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonCyan/40 flex items-center justify-center text-neonCyan text-xl mb-4">
+                            <i class="fa-solid fa-comments"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Communication</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Articulating complex ideas clearly, negotiating terms, and building high-trust relationships.</p>
+                    </div>
+
+                    <!-- Skill 2 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-vividPurple">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-vividPurple/40 flex items-center justify-center text-vividPurple text-xl mb-4">
+                            <i class="fa-solid fa-puzzle-piece"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Problem Solving</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Deconstructing complex real-world friction into structured, practical solutions.</p>
+                    </div>
+
+                    <!-- Skill 3 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonMint">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonMint/40 flex items-center justify-center text-neonMint text-xl mb-4">
+                            <i class="fa-solid fa-users-gear"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Leadership</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Inspiring cross-functional teams, managing uncertainty, and steering collective goals.</p>
+                    </div>
+
+                    <!-- Skill 4 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-coralPink">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-coralPink/40 flex items-center justify-center text-coralPink text-xl mb-4">
+                            <i class="fa-solid fa-wand-magic-sparkles"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Creativity</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Connecting disparate concepts to design novel aesthetic, functional, or economic models.</p>
+                    </div>
+
+                    <!-- Skill 5 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-brightAmber">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-brightAmber/40 flex items-center justify-center text-brightAmber text-xl mb-4">
+                            <i class="fa-solid fa-handshake font-bold"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Sales & Influence</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Understanding human psychology, needs matching, and driving value exchanges.</p>
+                    </div>
+
+                    <!-- Skill 6 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonCyan">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonCyan/40 flex items-center justify-center text-neonCyan text-xl mb-4">
+                            <i class="fa-solid fa-brain"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Critical Thinking</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Evaluating arguments, detecting biases, and making sound evidence-based judgements.</p>
+                    </div>
+
+                    <!-- Skill 7 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-neonMint">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-neonMint/40 flex items-center justify-center text-neonMint text-xl mb-4">
+                            <i class="fa-solid fa-arrows-spin"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Adaptability</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Unlearning outdated habits quickly and thriving amidst systemic paradigm shifts.</p>
+                    </div>
+
+                    <!-- Skill 8 -->
+                    <div class="glass-panel-interactive p-6 rounded-2xl border-t-2 border-t-coralPink">
+                        <div class="w-12 h-12 rounded-xl bg-obsidianLight border border-coralPink/40 flex items-center justify-center text-coralPink text-xl mb-4">
+                            <i class="fa-solid fa-rocket"></i>
+                        </div>
+                        <h4 class="font-display text-lg font-bold text-white mb-2">Entrepreneurship</h4>
+                        <p class="text-xs text-slate-300 leading-relaxed">Identifying unmet market demands and assembling resources to deliver real solutions.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- INTERACTIVE CAREER PATH BUILDER -->
+            <section class="py-16 px-4 sm:px-8 max-w-5xl mx-auto">
+                <div class="glass-panel rounded-3xl p-8 sm:p-12 border border-neonMint/30 shadow-xl relative">
+                    <div class="text-center max-w-2xl mx-auto mb-8">
+                        <span class="text-xs font-mono text-neonMint uppercase font-bold">Interactive Assessment Tool</span>
+                        <h3 class="font-display text-3xl font-bold mt-1 text-white">Find Your Alternative Career Vector</h3>
+                        <p class="text-slate-300 text-sm mt-2">Select what naturally energizes you to discover aligned non-tech career pathways.</p>
+                    </div>
+
+                    <!-- Quiz Options Buttons -->
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 mb-8">
+                        <button onclick="recommendCareer('machines', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-neonCyan text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-gears text-xl text-neonCyan"></i>
+                            <span>Working with Machines</span>
+                        </button>
+
+                        <button onclick="recommendCareer('people', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-vividPurple text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-people-group text-xl text-vividPurple"></i>
+                            <span>Working with People</span>
+                        </button>
+
+                        <button onclick="recommendCareer('numbers', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-neonMint text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-calculator text-xl text-neonMint"></i>
+                            <span>Working with Numbers</span>
+                        </button>
+
+                        <button onclick="recommendCareer('creating', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-coralPink text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-palette text-xl text-coralPink"></i>
+                            <span>Creating Things</span>
+                        </button>
+
+                        <button onclick="recommendCareer('helping', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-brightAmber text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-hand-holding-medical text-xl text-brightAmber"></i>
+                            <span>Helping People</span>
+                        </button>
+
+                        <button onclick="recommendCareer('business', this)" class="career-quiz-btn p-4 rounded-xl glass-panel hover:border-neonCyan text-xs font-bold text-slate-200 flex flex-col items-center justify-center gap-2 transition-all">
+                            <i class="fa-solid fa-briefcase text-xl text-neonCyan"></i>
+                            <span>Running a Business</span>
+                        </button>
+                    </div>
+
+                    <!-- Dynamic Quiz Results Box -->
+                    <div id="quizResultBox" class="glass-panel p-6 rounded-2xl border border-neonMint/40 hidden">
+                        <h4 id="quizResultTitle" class="font-display font-bold text-neonMint text-lg mb-3">Recommended Career Vectors</h4>
+                        <div id="quizResultItems" class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs text-slate-200">
+                            <!-- JS Items inserted here -->
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FINAL MESSAGE & CARDS -->
+            <section class="py-20 px-4 sm:px-8 max-w-7xl mx-auto text-center">
+                <div class="max-w-3xl mx-auto space-y-4 mb-12">
+                    <h3 class="font-display text-4xl sm:text-5xl font-extrabold text-white">The Future Belongs to Adaptable Problem Solvers.</h3>
+                    <p class="text-slate-300 text-base leading-relaxed">
+                        Whether the future brings more technology or less, the capability to learn continuously, communicate clearly, and solve real human problems remains permanently supreme.
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+                    <div class="glass-panel p-8 rounded-2xl border border-neonMint/30">
+                        <i class="fa-solid fa-book-open text-neonMint text-3xl mb-4"></i>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">01. LEARN</h4>
+                        <p class="text-xs text-slate-300">Develop cross-disciplinary skills beyond a single programming language or tool stack.</p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl border border-vividPurple/30">
+                        <i class="fa-solid fa-arrows-rotate text-vividPurple text-3xl mb-4"></i>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">02. ADAPT</h4>
+                        <p class="text-xs text-slate-300">Embrace career evolution as economic paradigms and regional industry sectors shift.</p>
+                    </div>
+
+                    <div class="glass-panel p-8 rounded-2xl border border-coralPink/30">
+                        <i class="fa-solid fa-lightbulb text-coralPink text-3xl mb-4"></i>
+                        <h4 class="font-display text-xl font-bold text-white mb-2">03. CREATE</h4>
+                        <p class="text-xs text-slate-300">Build tangible physical or organizational solutions rather than relying on standard corporate structures.</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+
+    </main>
+
+    <!-- BACK TO TOP BUTTON -->
+    <button id="backToTopBtn" onclick="scrollToTop()" class="fixed bottom-6 right-6 z-40 p-3 rounded-xl glass-panel border border-neonMint/40 text-neonMint hover:text-white hover:bg-neonMint/20 transition-all opacity-0 pointer-events-none shadow-md">
+        <i class="fa-solid fa-arrow-up text-base"></i>
+    </button>
+
+    <!-- GLOBAL FOOTER -->
+    <footer class="border-t border-white/10 glass-panel py-12 px-4 sm:px-8 mt-auto">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+            <div class="md:col-span-6 space-y-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-8 h-8 rounded-lg bg-neonMint flex items-center justify-center text-black font-bold">
+                        <i class="fa-solid fa-bolt text-sm"></i>
+                    </div>
+                    <span class="font-display text-lg font-bold text-white">FUTURE 2030</span>
+                </div>
+                <p class="text-xs text-slate-400 max-w-sm">Understanding the future before it arrives. Strategic insights on technological shifts, urban economic resilience, and career adaptability.</p>
+            </div>
+
+            <div class="md:col-span-6 flex flex-wrap gap-6 md:justify-end text-xs font-mono">
+                <button onclick="switchRoute('home')" class="text-slate-400 hover:text-neonMint transition-colors">01. Home (IT 2030)</button>
+                <button onclick="switchRoute('chennai')" class="text-slate-400 hover:text-vividPurple transition-colors">02. Chennai Scenario</button>
+                <button onclick="switchRoute('careers')" class="text-slate-400 hover:text-coralPink transition-colors">03. Life Beyond IT</button>
+            </div>
+        </div>
+
+        <div class="max-w-7xl mx-auto mt-8 pt-6 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-400 font-mono">
+            <span>© 2030 Strategic Foresight Lab. All Rights Reserved.</span>
+            <span class="mt-2 sm:mt-0">GitHub Pages Single Page Architecture</span>
+        </div>
+    </footer>
+
+    <script>
+        // Data Store for 2030 Jobs Grid
+        const jobs2030Data = [
+            { title: "AI Systems Architect", type: "ai", icon: "fa-brain", color: "text-neonMint", border: "border-neonMint/30", desc: "Designing multi-agent neural orchestrations for enterprise decision loops." },
+            { title: "Machine Learning Engineer", type: "ai", icon: "fa-robot", color: "text-neonCyan", border: "border-neonCyan/30", desc: "Training specialized domain models on proprietary real-time telemetry." },
+            { title: "Data Fabric Specialist", type: "ai", icon: "fa-database", color: "text-neonMint", border: "border-neonMint/30", desc: "Building unified streaming pipelines across edge nodes and quantum clouds." },
+            { title: "Autonomous Security Lead", type: "infra", icon: "fa-shield-virus", color: "text-coralPink", border: "border-coralPink/30", desc: "Deploying self-healing defensive AI agents against automated threat vectors." },
+            { title: "Cloud Quantum Architect", type: "infra", icon: "fa-cloud-bolt", color: "text-vividPurple", border: "border-vividPurple/30", desc: "Managing hybrid classical-quantum cloud compute clusters." },
+            { title: "Full Stack AI Synthesizer", type: "specialized", icon: "fa-code", color: "text-brightAmber", border: "border-brightAmber/30", desc: "Directing generative code synthesis and prompt orchestration models." },
+            { title: "Autonomous DevOps Director", type: "infra", icon: "fa-server", color: "text-coralPink", border: "border-coralPink/30", desc: "Managing zero-touch CI/CD infrastructure pipelines." },
+            { title: "Robotics Field Integrator", type: "specialized", icon: "fa-robot", color: "text-neonCyan", border: "border-neonCyan/30", desc: "Integrating embodied AI hardware with physical spatial automation." },
+            { title: "AI Product Director", type: "specialized", icon: "fa-cubes", color: "text-brightAmber", border: "border-brightAmber/30", desc: "Translating human needs into autonomous multi-modal agent workflows." },
+            { title: "Spatial UX Designer", type: "specialized", icon: "fa-vr-cardboard", color: "text-vividPurple", border: "border-vividPurple/30", desc: "Crafting interfaces for spatial computing and neural feedback interfaces." },
+            { title: "Blockchain Protocol Lead", type: "specialized", icon: "fa-link", color: "text-neonMint", border: "border-neonMint/30", desc: "Securing decentralized cryptographic verification networks." },
+            { title: "AI Ethics & Safety Auditor", type: "ai", icon: "fa-scale-balanced", color: "text-brightAmber", border: "border-brightAmber/30", desc: "Auditing algorithmic models for bias, compliance, and safety." }
+        ];
+
+        // Data Store for Alternative Careers Domain
+        const alternativeCareersData = [
+            {
+                category: "Engineering & Manufacturing",
+                icon: "fa-gears",
+                color: "text-neonCyan",
+                border: "border-neonCyan/40",
+                jobs: ["Mechanical Design Engineer", "Automobile Production Tech", "Process Quality Specialist", "Electrical Grid Tech", "Civil Structural Engineer"]
+            },
+            {
+                category: "Healthcare & Life Sciences",
+                icon: "fa-user-nurse",
+                color: "text-neonMint",
+                border: "border-neonMint/40",
+                jobs: ["Clinical Specialist Nurse", "Medical Lab Technologist", "Pharmacist", "Physiotherapist", "Healthcare Administrator"]
+            },
+            {
+                category: "Business & Commerce",
+                icon: "fa-chart-line",
+                color: "text-vividPurple",
+                border: "border-vividPurple/40",
+                jobs: ["Business Development Lead", "B2B Sales Strategist", "Brand Marketing Specialist", "Operations Manager", "HR Consultant"]
+            },
+            {
+                category: "Finance & Advisory",
+                icon: "fa-coins",
+                color: "text-brightAmber",
+                border: "border-brightAmber/40",
+                jobs: ["Chartered Accountant", "Commercial Banker", "Equity Financial Analyst", "Risk Specialist", "Tax Consultant"]
+            },
+            {
+                category: "Education & Coaching",
+                icon: "fa-chalkboard-user",
+                color: "text-neonCyan",
+                border: "border-neonCyan/40",
+                jobs: ["Vocational Educator", "Academic Lecturer", "Corporate Trainer", "Educational Consultant", "Sports Coach"]
+            },
+            {
+                category: "Skilled Physical Trades",
+                icon: "fa-hammer",
+                color: "text-coralPink",
+                border: "border-coralPink/40",
+                jobs: ["Industrial Electrician", "Precision Welder", "HVAC Master Tech", "Plumbing Specialist", "Automotive Mechanic"]
+            },
+            {
+                category: "Creative & Design",
+                icon: "fa-paint-brush",
+                color: "text-vividPurple",
+                border: "border-vividPurple/40",
+                jobs: ["Spatial Interior Designer", "Industrial Product Designer", "Video Director & Editor", "Fashion Designer", "Content Strategist"]
+            },
+            {
+                category: "Agribusiness & Food",
+                icon: "fa-wheat-awn",
+                color: "text-brightAmber",
+                border: "border-brightAmber/40",
+                jobs: ["Agribusiness Entrepreneur", "Precision Farmer", "Food Processing Lead", "Organic Dairy Manager", "Agronomy Specialist"]
+            }
+        ];
+
+        let currentJobFilter = 'all';
+
+        // Render 2030 Jobs Grid
+        function render2030Jobs(filter = 'all', searchQuery = '') {
+            const container = document.getElementById('jobs2030Grid');
+            if (!container) return;
+            
+            let filtered = filter === 'all' 
+                ? jobs2030Data 
+                : jobs2030Data.filter(j => j.type === filter);
+
+            if (searchQuery.trim() !== '') {
+                const q = searchQuery.toLowerCase();
+                filtered = filtered.filter(j => j.title.toLowerCase().includes(q) || j.desc.toLowerCase().includes(q));
+            }
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="col-span-full py-8 text-center text-slate-400 font-mono text-xs">No matching 2030 roles found.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(job => `
+                <div class="glass-panel-interactive p-5 rounded-2xl border ${job.border} flex flex-col justify-between group">
+                    <div>
+                        <div class="w-10 h-10 rounded-xl bg-obsidianLight border border-white/10 flex items-center justify-center ${job.color} text-lg mb-3 group-hover:scale-110 transition-transform shadow-md">
+                            <i class="fa-solid ${job.icon}"></i>
+                        </div>
+                        <h4 class="font-display font-bold text-white text-base">${job.title}</h4>
+                        <p class="text-xs text-slate-300 mt-2 leading-relaxed">${job.desc}</p>
+                    </div>
+                    <span class="text-[10px] font-mono font-bold uppercase ${job.color} mt-4 block tracking-wider">2030 HIGH DEMAND</span>
+                </div>
+            `).join('');
+        }
+
+        function filter2030Jobs(type, btnElement) {
+            currentJobFilter = type;
+            document.querySelectorAll('.job-filter-btn').forEach(btn => {
+                btn.classList.remove('bg-neonMint', 'text-black');
+                btn.classList.add('text-slate-300');
+            });
+            btnElement.classList.add('bg-neonMint', 'text-black');
+            btnElement.classList.remove('text-slate-300');
+            
+            const searchVal = document.getElementById('jobSearchInput')?.value || '';
+            render2030Jobs(type, searchVal);
+        }
+
+        function handleJobSearch() {
+            const searchVal = document.getElementById('jobSearchInput').value;
+            render2030Jobs(currentJobFilter, searchVal);
+        }
+
+        // Render Alternative Careers Grid
+        function renderAlternativeCareers() {
+            const container = document.getElementById('careersContainer');
+            if (!container) return;
+
+            container.innerHTML = alternativeCareersData.map(cat => `
+                <div class="glass-panel p-6 rounded-2xl border ${cat.border} flex flex-col justify-between hover:border-white/40 transition-all">
+                    <div>
+                        <div class="flex items-center space-x-3 mb-4">
+                            <i class="fa-solid ${cat.icon} ${cat.color} text-xl"></i>
+                            <h4 class="font-display text-base font-bold text-white">${cat.category}</h4>
+                        </div>
+                        <ul class="space-y-2 text-xs text-slate-300">
+                            ${cat.jobs.map(j => `<li class="flex items-center"><i class="fa-solid fa-chevron-right text-[8px] text-slate-500 mr-2"></i>${j}</li>`).join('')}
+                        </ul>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Client-Side SPA Navigation Handler with Hash Routing
+        function switchRoute(routeName) {
+            if (window.location.hash !== `#${routeName}`) {
+                history.pushState(null, '', `#${routeName}`);
+            }
+
+            document.querySelectorAll('.page-view').forEach(view => {
+                view.classList.remove('active-view');
+                view.classList.add('hidden-view');
+            });
+
+            document.querySelectorAll('.nav-link').forEach(btn => {
+                btn.classList.remove('text-black', 'bg-neonMint');
+                btn.classList.add('text-slate-300');
+            });
+
+            const activeView = document.getElementById(`view-${routeName}`);
+            const activeNav = document.getElementById(`nav-${routeName}`);
+
+            if (activeView) {
+                activeView.classList.remove('hidden-view');
+                activeView.classList.add('active-view');
+            }
+
+            if (activeNav) {
+                activeNav.classList.add('text-black', 'bg-neonMint');
+                activeNav.classList.remove('text-slate-300');
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+
+            if (routeName === 'chennai') {
+                animateCounters();
+            }
+        }
+
+        // Interactive Digital vs Real World Impact Slider
+        function updateImpactSlider(val) {
+            const textVal = document.getElementById('sliderValueText');
+            const techDesc = document.getElementById('techImpactDesc');
+            const physDesc = document.getElementById('physImpactDesc');
+
+            const techPct = 100 - val;
+            const physPct = val;
+
+            if (textVal) textVal.innerText = `${techPct}% TECH / ${physPct}% PHYSICAL`;
+
+            if (techDesc) {
+                if (techPct > 60) {
+                    techDesc.innerText = "Dominant tech exports drive OMR real estate expansion, high consumption, and digital venture scaling.";
+                } else if (techPct < 40) {
+                    techDesc.innerText = "Reduced software dominance converts tech parks into mixed-use commercial, research, and educational spaces.";
+                } else {
+                    techDesc.innerText = "Software exports drive real estate expansion on OMR, white-collar consumption, and venture capital inflow.";
+                }
+            }
+
+            if (physDesc) {
+                if (physPct > 60) {
+                    physDesc.innerText = "Heavy industrial growth in manufacturing, shipbuilding, and healthcare turns Chennai into South Asia's production capital.";
+                } else if (physPct < 40) {
+                    physDesc.innerText = "Core manufacturing supports steady baseline economic output alongside tech ecosystem dominance.";
+                } else {
+                    physDesc.innerText = "Automotive hubs in Sriperumbudur, medical tourism, and sea trade drive sustained industrial GDP.";
+                }
+            }
+        }
+
+        // Interactive Career Quiz Functionality
+        function recommendCareer(type, btnElement) {
+            document.querySelectorAll('.career-quiz-btn').forEach(btn => btn.classList.remove('border-neonMint', 'bg-obsidianLight'));
+            btnElement.classList.add('border-neonMint', 'bg-obsidianLight');
+
+            const resultBox = document.getElementById('quizResultBox');
+            const resultItems = document.getElementById('quizResultItems');
+            const resultTitle = document.getElementById('quizResultTitle');
+            if (!resultBox || !resultItems) return;
+
+            let recommendations = [];
+            let title = "";
+
+            switch(type) {
+                case 'machines':
+                    title = "Recommended Paths for Machine Affinity:";
+                    recommendations = [
+                        "Mechanical Design Engineer",
+                        "Automotive Systems Technician",
+                        "Robotics Hardware Operator",
+                        "Industrial Electrician",
+                        "Precision Manufacturing Specialist"
+                    ];
+                    break;
+                case 'people':
+                    title = "Recommended Paths for People Focus:";
+                    recommendations = [
+                        "Corporate HR & Talent Lead",
+                        "High-Value B2B Sales Executive",
+                        "Vocational Educator / Trainer",
+                        "Healthcare Specialist Nurse",
+                        "Public Relations Director"
+                    ];
+                    break;
+                case 'numbers':
+                    title = "Recommended Paths for Analytical Skills:";
+                    recommendations = [
+                        "Chartered Accountant",
+                        "Financial Risk Analyst",
+                        "Commercial Banking Lead",
+                        "Tax Advisor & Consultant",
+                        "Supply Chain Logistics Analyst"
+                    ];
+                    break;
+                case 'creating':
+                    title = "Recommended Paths for Creative & Aesthetic Talents:";
+                    recommendations = [
+                        "Industrial Product Designer",
+                        "Architectural & Interior Designer",
+                        "Video & Media Producer",
+                        "Fashion Brand Creator",
+                        "Commercial Photographer"
+                    ];
+                    break;
+                case 'helping':
+                    title = "Recommended Paths for Service & Care Focus:";
+                    recommendations = [
+                        "Physiotherapist / Rehabilitation Lead",
+                        "Clinical Medical Lab Director",
+                        "Community Healthcare Administrator",
+                        "Educational Guidance Consultant",
+                        "Non-Profit Operations Director"
+                    ];
+                    break;
+                case 'business':
+                    title = "Recommended Paths for Business Leadership:";
+                    recommendations = [
+                        "Agribusiness Entrepreneur",
+                        "Retail Franchise Operator",
+                        "Industrial Operations Manager",
+                        "Logistics Hub Founder",
+                        "Commercial Property Developer"
+                    ];
+                    break;
+            }
+
+            resultTitle.innerText = title;
+            resultItems.innerHTML = recommendations.map(rec => `
+                <div class="glass-panel p-3 rounded-xl border border-white/10 flex items-center space-x-2">
+                    <i class="fa-solid fa-check text-neonMint text-xs"></i>
+                    <span>${rec}</span>
+                </div>
+            `).join('');
+
+            resultBox.classList.remove('hidden');
+        }
+
+        // Mobile Menu Toggle
+        function toggleMobileMenu() {
+            const drawer = document.getElementById('mobileDrawer');
+            const icon = document.getElementById('menuIcon');
+            if (drawer) {
+                drawer.classList.toggle('hidden');
+                icon.classList.toggle('fa-bars');
+                icon.classList.toggle('fa-xmark');
+            }
+        }
+
+        // Scroll Helpers
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function scrollToSection(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                el.scrollIntoView({ behavior: 'smooth' });
+            }
+        }
+
+        // Back to top button visibility on scroll
+        window.addEventListener('scroll', () => {
+            const btn = document.getElementById('backToTopBtn');
+            if (btn) {
+                if (window.scrollY > 350) {
+                    btn.classList.remove('opacity-0', 'pointer-events-none');
+                } else {
+                    btn.classList.add('opacity-0', 'pointer-events-none');
+                }
+            }
+        });
+
+        // Counter Animation for Chennai Page
+        function animateCounters() {
+            const counters = document.querySelectorAll('.counter-val');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                if (!target) return;
+                
+                let count = 0;
+                const speed = target / 30;
+                const update = () => {
+                    count += speed;
+                    if (count < target) {
+                        counter.innerText = Math.ceil(count).toLocaleString() + "+";
+                        setTimeout(update, 25);
+                    } else {
+                        counter.innerText = target.toLocaleString() + "+";
+                    }
+                };
+                update();
+            });
+        }
+
+        // Interactive Cyber Node Canvas (Hero Section Page 1)
+        function initHeroCanvas() {
+            const canvas = document.getElementById('heroNodeCanvas');
+            if (!canvas) return;
+            const ctx = canvas.getContext('2d');
+
+            function resizeCanvas() {
+                if (!canvas.parentElement) return;
+                canvas.width = canvas.parentElement.clientWidth;
+                canvas.height = canvas.parentElement.clientHeight;
+            }
+            resizeCanvas();
+            window.addEventListener('resize', resizeCanvas);
+
+            const nodes = Array.from({ length: 28 }, () => ({
+                x: Math.random() * (canvas.width || 300),
+                y: Math.random() * (canvas.height || 300),
+                vx: (Math.random() - 0.5) * 0.9,
+                vy: (Math.random() - 0.5) * 0.9,
+                radius: Math.random() * 2 + 2.5
+            }));
+
+            let mouse = { x: null, y: null };
+            canvas.addEventListener('mousemove', (e) => {
+                const rect = canvas.getBoundingClientRect();
+                mouse.x = e.clientX - rect.left;
+                mouse.y = e.clientY - rect.top;
+            });
+
+            canvas.addEventListener('mouseleave', () => {
+                mouse.x = null;
+                mouse.y = null;
+            });
+
+            function animateCanvas() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+                nodes.forEach((node, idx) => {
+                    node.x += node.vx;
+                    node.y += node.vy;
+
+                    if (node.x < 0 || node.x > canvas.width) node.vx *= -1;
+                    if (node.y < 0 || node.y > canvas.height) node.vy *= -1;
+
+                    // Draw Node
+                    ctx.beginPath();
+                    ctx.arc(node.x, node.y, node.radius, 0, Math.PI * 2);
+                    ctx.fillStyle = idx % 3 === 0 ? '#00f5d4' : (idx % 3 === 1 ? '#06b6d4' : '#f43f5e');
+                    ctx.fill();
+
+                    // Connect Nodes
+                    for (let j = idx + 1; j < nodes.length; j++) {
+                        const other = nodes[j];
+                        const dist = Math.hypot(node.x - other.x, node.y - other.y);
+                        if (dist < 90) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.strokeStyle = `rgba(0, 245, 212, ${1 - dist / 90})`;
+                            ctx.lineWidth = 0.6;
+                            ctx.stroke();
+                        }
+                    }
+
+                    // Mouse Interaction
+                    if (mouse.x !== null && mouse.y !== null) {
+                        const mDist = Math.hypot(node.x - mouse.x, node.y - mouse.y);
+                        if (mDist < 110) {
+                            ctx.beginPath();
+                            ctx.moveTo(node.x, node.y);
+                            ctx.lineTo(mouse.x, mouse.y);
+                            ctx.strokeStyle = `rgba(244, 63, 94, ${1 - mDist / 110})`;
+                            ctx.lineWidth = 1.2;
+                            ctx.stroke();
+                        }
+                    }
+                });
+
+                requestAnimationFrame(animateCanvas);
+            }
+
+            animateCanvas();
+        }
+
+        // Handle browser hash navigation
+        window.addEventListener('popstate', () => {
+            const hash = window.location.hash.replace('#', '') || 'home';
+            if (['home', 'chennai', 'careers'].includes(hash)) {
+                switchRoute(hash);
+            }
+        });
+
+        // On Window Load
+        window.onload = function() {
+            render2030Jobs();
+            renderAlternativeCareers();
+            initHeroCanvas();
+
+            // Check initial URL hash route
+            const initialHash = window.location.hash.replace('#', '');
+            if (['home', 'chennai', 'careers'].includes(initialHash)) {
+                switchRoute(initialHash);
+            } else {
+                switchRoute('home');
+            }
+        };
+    </script>
+</body>
+</html>
